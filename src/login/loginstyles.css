@@ -1,0 +1,12 @@
+body {
+    background-color: #adb5bd;
+}
+.logcolor {
+    color: white;
+}
+button {
+    color: darkgray;
+}
+input {
+    align-items: center;
+}
