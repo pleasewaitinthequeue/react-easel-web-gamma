@@ -1,0 +1,79 @@
+{
+  "courses": [
+    {
+      "courseId":"0",
+      "owner":"jomalair@iu.edu",
+      "managers":["jomalair@iu.edu"],
+      "name":"MET-35600-24524",
+      "school":"Mechanical Engineering Technology",
+      "title":"carbon fiber basket weaving for electric automobile tires",
+      "description":"students in the course will learn how to weave carbon fiber together to make futuristic automobile tires fit for an elon musk dream.",
+      "students": ["jomalair@iu.edu", "annamath@iu.edu", "nfurniss@iu.edu", "drkulkar@iu.edu" ],
+      "assignments": [
+        {
+          "assignmentId": "0",
+          "name":  "interviewing an industry professional",
+          "description":  "interviewing an industry professional is an important look into how the carbon fiber weaving operations are run on a day to day basis.",
+          "due": "",
+          "status":  "incomplete",
+          "isTemplate": false,
+          "tasks": [
+            {
+              "taskId": "0",
+              "name":  "pre-interview questions",
+              "type":  "pre-task",
+              "description":  "answer each of the questions prior to completing your interview",
+              "dueDateSetBy":  "instructor",
+              "scheduledEvent": {
+                "eventId": "0",
+                "eventName":  "interview event",
+                "location": {
+                "latitude":  "39.756014",
+                "longitude":  "-86.153205",
+                "name":  "At John Manager's Office"
+                },
+                "dueDate":  "",
+                "creator":  "jomalair@iu.edu"
+            },
+          "due": "",
+          "status":  "incomplete",
+          "questions": [
+            {
+              "questionId":"0",
+              "number":"1",
+              "name":"question a",
+              "description":"what kinds of details do you expect to learn from this individual that you could not otherwise know?",
+              "answerType":"text",
+              "status":"incomplete",
+              "answers":[
+                {
+                  "answerId":"0",
+                  "answerer":"jomalair@iu.edu",
+                  "answerType":"text",
+                  "title":"",
+                  "caption":  "",
+                  "description":  "",
+                  "url":  "",
+                  "answer": "This is a great answer",
+                  "status":  "complete"
+                }
+
+              ]
+          }]
+
+            }]
+        }
+      ],
+      "announcements": [
+        {
+          "announcementId": "0",
+          "sender": "instructor@iu.edu",
+          "timestamp":  "",
+          "subject":  "Schedule your Interviews",
+          "body":  "Everyone make sure that you schedule your Interviews by Next Tuesday."
+        }
+      ]
+    }
+  ]
+
+}

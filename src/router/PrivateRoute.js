@@ -5,12 +5,9 @@ export default function PrivateRoute ({component: Component, authenticated, ...r
     return (
         <Route
             {...rest}
-            render={props=>
-                authenticated ===true ?(
-                    <Component {...props} {...rest}/>
-                ):(
-                    <Redirect to="/login"/>
-                )
+            render={(props)=>
+                authenticated ===true ?
+                    ( <Component {...props} {...rest}/> ):( <Redirect to="/login"/> )
             }
         />
     );

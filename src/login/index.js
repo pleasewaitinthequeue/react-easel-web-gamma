@@ -1,11 +1,20 @@
 import React, { Component } from 'react';
-import fire from "firebase";
+import fire from 'firebase';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import {Button} from 'reactstrap';
+import {Redirect, withRouter} from 'react-router';
+
 
 
 class LogIn extends Component {
-    state = { isSignedIn: false }
+    constructor(props){
+        super(props);
+        this.state = {
+            isSignedIn: false,
+            user: null,
+        }
+    }
+
     uiConfig = {
         signInFlow: "popup",
         signInOptions: [
@@ -17,12 +26,44 @@ class LogIn extends Component {
         }
     };
 
-    componentDidMount = () => {
-        fire.auth().onAuthStateChanged(user => {
-            this.setState({ isSignedIn: !!user })
-            console.log("user", user)
+    componentDidMount(){
+        fire.auth().onAuthStateChanged((user) => {
+            if(user){
+                this.setState({
+                    isSignedIn: true,
+                    user: user,
+                });
+                fire.database().ref(`/users/${user.uid}`).update({
+                    email:user.email,
+                    name:user.displayName,
+                    image:user.photoURL,
+                    isAnonymous:user.isAnonymous,
+                    providerId:user.providerId,
+                }).then(()=>{
+
+                }).catch((error)=>{
+                   console.log(`error: ${error}`);
+                });
+            }else{
+                this.setState({
+                    isSignedIn: !!user,
+                    user: null,
+                });
+            }
+
         });
-    };
+    }
+
+    handleSignOut(event){
+        event.preventDefault();
+        fire.auth().signOut().then(()=> {
+            this.setState({
+                isSignedIn: false,
+                user: null,
+            });
+            this.props.history.push("/");
+        });
+    }
 
 
 
@@ -31,12 +72,13 @@ class LogIn extends Component {
             <div className="App">
                 {this.state.isSignedIn ? (
                     <span>
-            <div></div>
-                        <h1>Welcome {fire.auth().currentUser.displayName}</h1>
-                        <Button onClick={() => fire.auth().signOut()}>Sign out!</Button>
+                        <div>
+                            <h1>Welcome {fire.auth().currentUser.displayName}</h1>
+                            <Button onClick={this.handleSignOut}>Sign out!</Button>
+                        </div>
+                        <Redirect to="/Dashboard"/>
 
-
-          </span>
+                    </span>
                 ) : (
                     <StyledFirebaseAuth
                         uiConfig={this.uiConfig}
@@ -48,4 +90,4 @@ class LogIn extends Component {
     }
 }
 
-export default LogIn;
+export default withRouter(LogIn);
