@@ -2,14 +2,24 @@ import React, { Component } from 'react';
 import Course from './Course';
 import fire from '../../data/Fire';
 import { MdAddCircle } from 'react-icons/md';
+import ChipLister from '../common/ChipLister';
 //import data from '../../data/Courses.json';
+
+/*
+Passing Data Between React Components (up to Parent)
+https://medium.com/@ruthmpardee/passing-data-between-react-components-103ad82ebd17
+ */
 
 class Courses extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.user,
             courses: this.props.courses,
             mode:'loading',
+            owner:this.props.user.email,
+            students: [],
+            managers: [],
         }
     }
 
@@ -32,48 +42,97 @@ class Courses extends Component{
         this.getCourseList();
     }
 
-    getCourseList(){
-        let courseRef = fire.database().ref(`/courses`);
-        courseRef.once('value')
-            .then((snapshot) =>{
-                let courseList = [];
-                console.log(courseList);
-                snapshot.forEach((course)=>{
-                    if(course.val().students.includes(this.state.user.email)){
-                        courseList.push(snapshot.val());
-                    }else if(course.val().owner.includes(this.state.user.email) || course.val().managers.includes(this.state.user.email)){
-                        courseList.push(snapshot.val());
-                    }
-                });
-                if(courseList.length > 0){
-                    this.setState({
-                        courses: courseList,
-                        mode:'full'
-                    });
-                }else{
-                    this.setState({
-                        courses: courseList,
-                        mode:'empty'
+    getCourseList = () => {
+        console.log(this.state);
+        let courseList = [];
+        let courseRef = fire.database().ref(`/courses/`);
+        courseRef.once('value', (snapshot) =>{
+            console.log(snapshot);
+            snapshot.forEach((child) =>{
+                console.log(`course: ${child.val()}`);
+                if(
+                    child.val().owner === this.state.user.email ||
+                    child.val().managers.includes(this.state.user.email) ||
+                    child.val().students.includes(this.state.user.email)
+                ){
+                    courseList.push({
+                        courseId:child.key,
+                        owner:child.val().owner,
+                        name:child.val().name,
+                        school:child.val().school,
+                        title:child.val().title,
+                        description:child.val().description,
+                        managers:child.val().managers,
+                        students:child.val().students,
                     });
                 }
-                console.log(`courseList: ${JSON.stringify(courseList)}`);
-            }).catch((error) =>{
+            });
+            this.setState({
+                courses: courseList,
+                mode: courseList.length === 0 ? 'empty' : 'full',
+            });
+        }).catch((error)=>{
             console.log(`error: ${error}`);
         });
-    }
+    };
 
-    createCourse(){
-        //todo - add course form
-        //commit course to database
-        //push course into state
+    handleChipListStateChange = ( name, payload ) => {
+        console.log(`${name}:  ${JSON.stringify(payload)}`);
+        switch(name){
+            case 'students':
+                this.setState({
+                    students:payload,
+                });
+                break;
+            case 'managers':
+                this.setState({
+                    managers:payload,
+                });
+                break;
+            default:
+                break;
+        }
+    };
+
+    addMode = () => {
         this.setState({
-           mode:'adding',
+            mode:'adding',
         });
-    }
+    };
+
+    createCourse = (e) => {
+        //commit course to database
+        /* "courseId" "owner" "managers" [] "name" "school" "title" "description" "students": [], */
+        //push course into state
+        e.preventDefault();
+        let courseRef = fire.database().ref(`/courses`);
+        let course = {
+            owner:this.state.owner,
+            name:this.state.name,
+            school:this.state.school,
+            title:this.state.title,
+            description:this.state.description,
+            managers:this.state.managers,
+            students:this.state.students,
+        };
+        courseRef.push(course).then(()=>{
+            this.getCourseList();
+        }).catch((error)=>{
+            console.log(`error:  ${error}`);
+        });
+    };
+
+    handleChange = (e) => {
+        e.preventDefault();
+        this.setState({
+            [e.target.name]:e.target.value,
+        });
+        console.log(this.state);
+    };
 
     renderAddButton(){
         return(
-            <div style={styles.addButtonStyle} onClick={this.createCourse.bind(this)}>
+            <div style={styles.addButtonStyle} onClick={this.addMode.bind(this)}>
                 <MdAddCircle/>
                 <p>Add Course</p>
             </div>
@@ -81,6 +140,7 @@ class Courses extends Component{
     }
 
     render() {
+        const { students, managers } = this.state;
         switch(this.state.mode){
             case 'loading':
                 return (
@@ -103,24 +163,112 @@ class Courses extends Component{
                 );
                 return (
                     <div>
-                        {CoursePack}
+                        <div style={styles.coursePack}>
+                            {CoursePack}
+                        </div>
                         {this.renderAddButton()}
                     </div>
                 );
             case 'adding':
                 /* "courseId" "owner" "managers" [] "name" "school" "title" "description" "students": [], */
                 return(
-                    <div>
-                        <form onSubmit={this.createCourse()} style={styles.formStyle}>
-                            <label>
-                                managers:<input type="text"/>
-                            </label>
-                            <label>
-                                name:<input type="text" />
-                            </label>
+                    <div style={styles.formStyle}>
+                        <h1>Add Course</h1>
+                        <form onSubmit={this.createCourse} style={styles.formStyle}>
+                            <div style={styles.formSectionStyle}>
+                                <label>
+                                    Owner:{'  '}
+                                    <input
+                                        name="owner"
+                                        style={styles.formInputStyle}
+                                        type="text"
+                                        placeholder="user@example.com"
+                                        onInput={this.handleChange}
+                                        value={this.state.owner}
+                                    />
+                                </label>
+                                <label>
+                                    Course Name (Short):{'  '}
+                                    <input
+                                        name="name"
+                                        style={styles.formInputStyle}
+                                        type="text"
+                                        placeholder="LIT 101 00001"
+                                        onInput={this.handleChange}
+                                        value={this.state.name}
+                                    />
+                                </label>
+                                <label>
+                                    School{'  '}
+                                    <input
+                                        name="school"
+                                        style={styles.formInputStyle}
+                                        type="text"
+                                        placeholder="Liberal Arts"
+                                        onInput={this.handleChange}
+                                        value={this.state.school}
+                                    />
+                                </label>
+                                <label>
+                                    Course Title (Long):{'  '}
+                                    <input
+                                        name="title"
+                                        style={styles.formInputStyle}
+                                        type="text"
+                                        placeholder="Introduction to Literature"
+                                        onInput={this.handleChange}
+                                        value={this.state.title}
+                                    />
+                                </label>
+                                <label>
+                                    Course Description{'  '}
+                                    <input
+                                        name="description"
+                                        style={styles.formInputStyle}
+                                        type="text"
+                                        placeholder="An introduction to literature from 500 CE to Present Day"
+                                        onInput={this.handleChange}
+                                        value={this.state.description}
+                                    />
+                                </label>
+                            </div>
+                            <div style={styles.chipSectionStyle}>
+                                <label>
+                                    Course Managers({managers == null ? 0 : managers.length}):{'  '}
+                                    <div style={styles.chipContainerStyle}>
+                                    <ChipLister
+                                        divStyle={styles.chipDivStyle}
+                                        inputStyle={styles.chipInputStyle}
+                                        handleChipListStateChange={this.handleChipListStateChange}
+                                        emails={this.state.managers}
+                                        name="managers"
+                                    />
+                                    </div>
+                                </label>
+                                <label>
+                                    Course Students({students == null ? 0 : students.length}):{'  '}
+                                    <div style={styles.chipContainerStyle}>
+                                    <ChipLister
+                                        divStyle={styles.chipDivStyle}
+                                        inputStyle={styles.chipInputStyle}
+                                        handleChipListStateChange={this.handleChipListStateChange}
+                                        emails={this.state.students}
+                                        name="students"
+                                    />
+                                    </div>
+                                </label>
+                                <div>
+                                    <input
+                                        style={styles.chipInputStyle}
+                                        type="submit"
+                                    />
+                                </div>
+                            </div>
                         </form>
                     </div>
                 );
+            default:
+                return null;
         }
     }
 }
@@ -132,9 +280,51 @@ const styles = {
         alignItems:'center',
         justifyContent:'flex-start',
     },
-    formStyle:{
+    coursePack:{
+        display:'flex',
+        flexDirection:'row',
+        flexWrap:'wrap',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+    },
+    formStyle: {
+        display:'flex',
+        flexDirection:'row',
+        width: '100%',
+    },
+    formSectionStyle:{
+        display:'flex',
+        alignItems:'flex-end',
+        justifyContent:'flex-end',
+        flexDirection:'column',
+        marginRight:'150px',
+        width: '100%',
+    },
+    formInputStyle:{
         width:'400px',
-    }
+        margin:'5px',
+    },
+    chipSectionStyle:{
+        display:'flex',
+        alignItems:'flex-start',
+        flexDirection:'column',
+        marginLeft:'0px',
+        width: '100%',
+    },
+    chipDivStyle: {
+        fontSize:'12px',
+    },
+    chipInputStyle: {
+        width: '200px',
+        margin:'5px',
+    },
+    chipContainerStyle:{
+        display:'flex',
+        flexDirection:'column',
+        flexWrap:'wrap',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
+    },
 };
 
 export default Courses;

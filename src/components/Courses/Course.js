@@ -56,6 +56,7 @@ const styles = {
         border:`1px solid ${Theme.colors.darkBlue}`,
         display:'flex',
         flexDirection:'column',
+        margin:'5px',
     }
 };
 

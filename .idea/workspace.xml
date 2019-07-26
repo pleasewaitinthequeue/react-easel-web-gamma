@@ -2,39 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dec8e27-93e3-4252-a62d-28a02229df85" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/assets/images/easel_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Assignments/Assignment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Assignments/AssignmentMain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Assignments/Assignments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Courses/Course.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Courses/CourseMain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Courses/Courses.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Footer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Nav.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Profile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/Register/Register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Main/SignOut.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Public/Privacy.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Public/Terms.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Questions/Question.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Questions/QuestionMain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Questions/Questions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tasks/Task.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tasks/TaskMain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Tasks/Tasks.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Courses.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Fire.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/Theme.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/data/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/ChipLister.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/ChipLister.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/login/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/login/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router/PrivateRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/PrivateRoute.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/signup/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/signup/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Courses/Course.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/Course.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Courses/CourseMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/CourseMain.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Courses/Courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/Courses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Profile.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,23 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="18" column="63" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Courses/Courses.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="358">
-              <caret line="119" column="36" lean-forward="true" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
+            <state relative-caret-position="-34">
+              <caret line="58" column="43" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="43" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -69,10 +32,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/Main/Profile.js">
+        <entry file="file://$PROJECT_DIR$/src/components/Courses/CourseMain.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+            <state relative-caret-position="255">
+              <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/Courses/Course.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="578">
+              <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/common/ChipLister.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2057">
+              <caret line="123" column="48" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -92,6 +79,7 @@
       <find>forceRefresh</find>
       <find>NavLink</find>
       <find>LinkStyle</find>
+      <find>this.setState</find>
     </findStrings>
     <replaceStrings>
       <replace>'</replace>
@@ -131,8 +119,6 @@
         <option value="$PROJECT_DIR$/src/router/PrivateRoute.js" />
         <option value="$PROJECT_DIR$/src/components/Dashboard.js" />
         <option value="$PROJECT_DIR$/src/components/Assignments/AssignmentMain.js" />
-        <option value="$PROJECT_DIR$/src/components/Courses/CourseMain.js" />
-        <option value="$PROJECT_DIR$/src/components/Courses/Course.js" />
         <option value="$PROJECT_DIR$/src/components/Tasks/TaskMain.js" />
         <option value="$PROJECT_DIR$/src/components/Tasks/Task.js" />
         <option value="$PROJECT_DIR$/src/components/Tasks/Tasks.js" />
@@ -146,20 +132,24 @@
         <option value="$PROJECT_DIR$/src/components/Public/Privacy.js" />
         <option value="$PROJECT_DIR$/src/components/Main/Nav.js" />
         <option value="$PROJECT_DIR$/src/login/index.js" />
-        <option value="$PROJECT_DIR$/src/components/Main/Profile.js" />
+        <option value="$PROJECT_DIR$/src/components/common/ChipLister.css" />
         <option value="$PROJECT_DIR$/src/components/Main/Dashboard.js" />
+        <option value="$PROJECT_DIR$/src/components/Main/Profile.js" />
+        <option value="$PROJECT_DIR$/src/components/common/ChipLister.js" />
+        <option value="$PROJECT_DIR$/src/components/Courses/CourseMain.js" />
         <option value="$PROJECT_DIR$/src/components/Courses/Courses.js" />
+        <option value="$PROJECT_DIR$/src/components/Courses/Course.js" />
       </list>
     </option>
   </component>
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="814" />
-    <option name="height" value="867" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -195,6 +185,13 @@
               <item name="react-web-easel-gamma" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="react-web-easel-gamma" type="b2602c69:ProjectViewProjectNode" />
+              <item name="react-web-easel-gamma" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Courses" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -203,20 +200,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-web-easel-gamma" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-web-easel-gamma" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="react-web-easel-gamma" type="b2602c69:ProjectViewProjectNode" />
-              <item name="react-web-easel-gamma" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="Questions" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="react-web-easel-gamma" type="b2602c69:ProjectViewProjectNode" />
@@ -290,16 +273,23 @@
       <workItem from="1563538642746" duration="10189000" />
       <workItem from="1563558672713" duration="10074000" />
       <workItem from="1563798585777" duration="20075000" />
+      <workItem from="1563885114865" duration="11545000" />
+      <workItem from="1563903576938" duration="4163000" />
+      <workItem from="1563971830018" duration="7507000" />
+      <workItem from="1563991560527" duration="9279000" />
+      <workItem from="1564079372554" duration="365000" />
+      <workItem from="1564164009598" duration="571000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98909000" />
+    <option name="totallyTimeSpent" value="132339000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.55908287" visible="true" weight="0.2281491" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.55908287" visible="true" weight="0.24742931" />
       <window_info id="Structure" order="1" sideWeight="0.4409171" side_tool="true" weight="0.22557841" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -464,26 +454,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Courses/Course.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Courses/CourseMain.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/data/Courses.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
@@ -602,13 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/login/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -619,23 +582,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Main/Register/Register.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Main/Dashboard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="2" selection-start-line="3" selection-start-column="2" selection-end-line="3" selection-end-column="2" />
+        <state relative-caret-position="272">
+          <caret line="39" column="51" selection-start-line="39" selection-start-column="51" selection-end-line="39" selection-end-column="51" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Main/Register/Register.js">
-      <provider selected="true" editor-type-id="text-editor" />
+    <entry file="file://$PROJECT_DIR$/src/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="18" column="63" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
+        <state relative-caret-position="204">
+          <caret line="75" lean-forward="true" selection-start-line="75" selection-end-line="75" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -644,18 +614,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Main/Profile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="22" lean-forward="true" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
+        <state relative-caret-position="408">
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/ChipLister.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Courses/Courses.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="358">
-          <caret line="119" column="36" lean-forward="true" selection-start-line="119" selection-start-column="36" selection-end-line="119" selection-end-column="36" />
+        <state relative-caret-position="-34">
+          <caret line="58" column="43" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Courses/CourseMain.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Courses/Course.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="37" column="6" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/common/ChipLister.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2057">
+          <caret line="123" column="48" selection-start-line="123" selection-start-column="48" selection-end-line="123" selection-end-column="48" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

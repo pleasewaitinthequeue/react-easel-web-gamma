@@ -20,7 +20,9 @@ class Profile extends Component{
             );
         }else{
             return(
+                <div>
                 <img style={styles.imageStyle} src={this.state.user.photoURL} alt={this.state.user.displayName} />
+                </div>
             );
         }
 

@@ -37,7 +37,7 @@ class Dashboard extends Component{
                 <h2>Welcome {this.state.user.displayName}</h2>
                 <p>to your Course Dashboard</p>
                 <div style={styles.dashboardContainer}>
-                    <Courses />
+                    <Courses user={this.state.user} />
                 </div>
             </div>
         );

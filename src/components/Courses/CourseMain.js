@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import data from '../../data/Courses.json';
 import Assignments from '../Assignments/Assignments';
 import {Link} from "react-router-dom";
+import fire from "../../data/Fire";
 
 class CourseMain extends Component{
     constructor(props){
         super(props);
         this.state = {
             match: this.props.match,
-            info:data.courses[this.props.match.params.cId],
+            courseId:null,
+            name:null,
+            owner:null,
+            managers:[],
+            students:[],
+            school:null,
+            title:null,
+            description:null,
+            assignments:[],
         }
     }
 
@@ -28,6 +37,29 @@ class CourseMain extends Component{
         }
     */
 
+    componentWillMount(){
+        this.getCourseInfo();
+    }
+
+    getCourseInfo = () => {
+        const { cId } = this.state.match.params;
+        let courseRef = fire.database().ref(`/courses/${cId}/`);
+        return courseRef.once('value', (snapshot) => {
+            console.log(`course details: ${snapshot.key} ${snapshot.val()}`);
+
+            this.setState({
+                courseId:snapshot.key,
+                name:snapshot.val().name,
+                owner:snapshot.val().owner,
+                managers:snapshot.val().managers,
+                students:snapshot.val().students,
+                school:snapshot.val().school,
+                title:snapshot.val().title,
+                description:snapshot.val().description,
+            });
+        });
+    };
+
     render(){
         const { cId } = this.state.match.params;
         return(
@@ -37,12 +69,12 @@ class CourseMain extends Component{
                     <Link exact replace to={`/Courses/${cId}`}>Course</Link>
                 </div>
                 <div>
-                    <h1>{this.state.info.name}</h1>
-                    <h3>{this.state.info.title}</h3>
-                    <p>{this.state.info.description}</p>
+                    <h1>{this.state.name}</h1>
+                    <h3>{this.state.title}</h3>
+                    <p>{this.state.description}</p>
                 </div>
                 <div>
-                    <Assignments courseId={cId} match={this.state.match} assignments={this.state.info.assignments}/>
+                    <Assignments courseId={cId} match={this.state.match} assignments={this.state.assignments}/>
                 </div>
             </div>
         );
