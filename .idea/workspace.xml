@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dec8e27-93e3-4252-a62d-28a02229df85" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/common/ChipLister.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/ChipLister.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Courses/Course.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/Course.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Courses/CourseMain.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/CourseMain.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Courses/Courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Courses/Courses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Main/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Profile.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +15,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/Courses/Courses.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
+            <state relative-caret-position="17">
               <caret line="58" column="43" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="43" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
@@ -145,7 +138,7 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="1616" />
@@ -278,18 +271,18 @@
       <workItem from="1563971830018" duration="7507000" />
       <workItem from="1563991560527" duration="9279000" />
       <workItem from="1564079372554" duration="365000" />
-      <workItem from="1564164009598" duration="571000" />
+      <workItem from="1564164009598" duration="1521000" />
+      <workItem from="1566842048691" duration="1192000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="132339000" />
+    <option name="totallyTimeSpent" value="134481000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.55908287" visible="true" weight="0.24742931" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.55908287" visible="true" weight="0.2506427" />
       <window_info id="Structure" order="1" sideWeight="0.4409171" side_tool="true" weight="0.22557841" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -631,7 +624,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Courses/Courses.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
+        <state relative-caret-position="17">
           <caret line="58" column="43" selection-start-line="58" selection-start-column="33" selection-end-line="58" selection-end-column="43" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
