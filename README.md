@@ -10,7 +10,10 @@
 8. [/project/src/router](./src/router/README.md)
 9. [/project/src/signup](./src/signup/README.md)
 
-## Setup Procedure
+## EASEL Description
+Educational Application Supporting Experiential Learning (EASEL) is a web application with a mobile application counter part that allows Instructors to facilitate the experiential learning cycle by providing Just In Time content.  An ongoing project, the aim is to facilitate collection of audio / video as well as geospatial notifications that scaffold these types of activities.
+
+## Setup Procedure (Windows)
 1. Install [NodeJS](https://nodejs.org/en/)
 2. Install [Git CLI](https://git-scm.com/downloads)
 2. Confirm that NodeJS is installed by opening a command prompt and typing ``` node --version ```
