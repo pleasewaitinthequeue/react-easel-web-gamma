@@ -1,5 +1,15 @@
 # Components
 
+## Index
+1. [/project](../README.md)
+2. [/project/src](../src/README.md)
+4. [/project/src/assets](../src/assets/README.md)
+5. **[/project/src/components (you are here)](./README.md)**
+6. [/project/src/data](../src/data/README.md)
+7. [/project/src/login](../src/login/README.md)
+8. [/project/src/router](../src/router/README.md)
+9. [/project/src/signup](../src/signup/README.md)
+
 ### Common components
 Any components that might be used in multiple contexts are stored in the common directory.
 - **ChipLister** - the chip lister validates and adds emails as they're entered by the user, allowing for the entry of multiple emails via copy / paste.
@@ -10,6 +20,13 @@ Any components that are used on the Index page are stored in this directory. Thi
 - **Profile** - displays information about the user as authenticated by Google or Email / Password
 - **SignOut** - a standard component that unauthenticates the user, returning them to a public view of the Index page
 - **Register** - a placeholder for future functionality
+
+### Public Components
+Public components are components that are used on the Index Page by unauthenticated users.  These include:
+- About
+- Contact
+- Privacy
+- Terms of Service
 
 ### Objects Specific to EASEL
 
@@ -93,7 +110,7 @@ Questions are the main place where collaboration will happen.  While the Course,
 ```
 
 #### Answers
-Answer objects will be the smallest object in the database.  Students will answer Questions with Answers.  Additional metadata tags are included, for specific types of answers - for example - if the required answer type is a Video / Sound file, the URL field will be used to record the permanent location of the asset.  At a minimum, the Instructor will be able to see which students have answered the question.  
+Answer objects will be the smallest object in the database.  Students will answer Questions with Answers.  Additional metadata tags are included, for specific types of answers - for example - if the required answer type is a Video / Sound file, the URL field will be used to record the permanent location of the asset.  At a minimum, the Instructor will be able to see which students have answered the question.
 
 ```
 {
