@@ -1,7 +1,7 @@
 # EASEL for Web
 
 ## Index
-1. [/project (you are here)](./README.md)
+1. **[/project (you are here)](./README.md)**
 2. [/project/src](./src/README.md)
 4. [/project/src/assets](./src/assets/README.md)
 5. [/project/src/components](./src/components/README.md)
