@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import data from '../../data/Courses.json';
+//import data from '../../data/Courses.json';
 import Assignments from '../Assignments/Assignments';
 import {Link} from "react-router-dom";
 import fire from "../../data/Fire";

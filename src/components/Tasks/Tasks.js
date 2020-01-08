@@ -7,6 +7,7 @@ class Tasks extends Component{
         this.state = {
             match: this.props.match,
             tasks: this.props.tasks,
+            mode: this.props.tasks.length > 0 ? 'loading' : 'empty',
         }
     }
 
@@ -32,17 +33,36 @@ class Tasks extends Component{
  */
 
     render(){
-        let TaskPack = this.state.tasks.map((t)=>
-            <Task taskId={t.taskId} name={t.name} type={t.type} description={t.description}
-                  dueDateSetBy={t.dueDateSetBy} scheduledEvent={t.scheduledEvent} dueDate={t.dueDate}
-                  creator={t.creator} due={t.due} status={t.status} questions={t.questions} match={this.props.match} />
-        );
-        return(
-            <div>
-                <h1>Tasks</h1>
-                {TaskPack}
-            </div>
-        );
+        switch(this.state.mode){
+          case 'loading':
+            return(
+              <div>
+                <h3>Loading.......</h3>
+              </div>
+            );
+          case 'adding':
+          case 'empty':
+            return(
+              <div>
+                <h3>No Tasks to Display</h3>
+              </div>
+            );
+          case 'full':
+            let TaskPack = this.state.tasks.map((t)=>
+                <Task taskId={t.taskId} name={t.name} type={t.type} description={t.description}
+                      dueDateSetBy={t.dueDateSetBy} scheduledEvent={t.scheduledEvent} dueDate={t.dueDate}
+                      creator={t.creator} due={t.due} status={t.status} questions={t.questions} match={this.props.match} />
+            );
+            return(
+                <div>
+                    <h1>Tasks</h1>
+                    {TaskPack}
+                </div>
+            );
+          default:
+            return (<></>);
+        }
+
     }
 }
 

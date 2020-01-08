@@ -64,6 +64,7 @@ class Courses extends Component{
                         description:child.val().description,
                         managers:child.val().managers,
                         students:child.val().students,
+                        assignments:child.val().assignments,
                     });
                 }
             });
@@ -221,7 +222,7 @@ class Courses extends Component{
                                     />
                                 </label>
                                 <label>
-                                    Course Description{'  '}
+                                    Course Description:{'  '}
                                     <input
                                         name="description"
                                         style={styles.formInputStyle}
