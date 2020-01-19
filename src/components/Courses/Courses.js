@@ -159,7 +159,7 @@ class Courses extends Component{
             case 'full':
                 let CoursePack = this.state.courses.map((c) =>
                     <Course courseId={c.courseId} owner={c.owner} managers={c.managers} name={c.name}
-                            school={c.school} title={c.title} description={c.description} students={c.students}
+                            school={c.school} title={c.title} description={c.description} students={c.students} user={this.state.user}
                     />
                 );
                 return (

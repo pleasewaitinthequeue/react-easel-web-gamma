@@ -8,6 +8,7 @@ class Course extends Component{
         super(props);
         this.state = {
             render: true,
+            user: this.props.user,
             info: {
                 courseId: this.props.courseId,
                 owner: this.props.owner,

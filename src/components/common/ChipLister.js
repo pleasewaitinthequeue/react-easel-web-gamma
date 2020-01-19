@@ -12,7 +12,7 @@ class ChipLister extends Component{
         super(props);
         this.state = {
             name:this.props.name,
-            regExp:/[\w\d\.-]+@[\w\d\.-]+\.[\w\d\.-]+/g,
+            regExp:/[\w\d.-]+@[\w\d.-]+.[\w\d.-]+/g,
             divStyle:this.props.divStyle,
             inputStyle:this.props.inputStyle,
             value:'',
@@ -91,7 +91,7 @@ class ChipLister extends Component{
     }
 
     isInList(email) {
-        if(this.state.emails != []){
+        if(this.state.emails !== []){
             return this.state.emails.includes(email);
         }else{
             return false;
@@ -99,7 +99,7 @@ class ChipLister extends Component{
     }
 
     componentWillUpdate(){
-        if(this.state.emails != this.props.emails){
+        if(this.state.emails !== this.props.emails){
             this.props.handleChipListStateChange(this.state.name,this.state.emails);
         }
     }

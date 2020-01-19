@@ -19,14 +19,15 @@ class Assignments extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.user,
             courseId: this.props.courseId,
             assignments:this.props.assignments,
             match: this.props.match,
-            name: null,
-            description: null,
-            due: null,
-            status: null,
-            isTemplate: null,
+            name: '',
+            description: '',
+            due: '',
+            status: '',
+            isTemplate: false,
         }
     }
 
@@ -71,12 +72,11 @@ class Assignments extends Component{
 
     createAssignment = (e) => {
       e.preventDefault();
-
       let assignmentRef = fire.database().ref(`/courses/${this.state.courseId}/assignments/`);
       let assignment = {
         name:this.state.name,
         description:this.state.description,
-        due:this.state.due,
+        due:this.state.due.toString(),
         status:this.state.status,
         isTemplate:this.state.isTemplate
       };
@@ -96,7 +96,10 @@ class Assignments extends Component{
         console.log(this.state);
     };
 
-    onChange = date => this.setState({ due: date });
+    onChange = date => {
+      console.log(date);
+      this.setState({ due: date });
+    }
 
     renderAddAssignment(){
       return (
@@ -135,15 +138,23 @@ class Assignments extends Component{
                     </label>
                     <label>
                       Status: {'  '}
-                      <select>
+                      <select
+                        value={this.state.status}
+                        onChange={(event) => this.setState({status: event.target.value})}
+                      >
                         <option value=""></option>
                         <option value="draft">draft</option>
                         <option value="public">public</option>
                       </select>
                     </label>
-                      <label class="switch">
-                        <input type="checkbox" />
-                        <span class="slider round"></span>
+                      <label className="switch">
+                        Template?: {'  '}
+                        <input
+                          type="checkbox"
+                          value={this.state.isTemplate}
+                          onChange={() => this.setState({isTemplate: !this.state.isTemplate})}
+                        />
+                        <span className="slider round"></span>
                       </label>
                     <div>
                         <input

@@ -8,14 +8,15 @@ class AssignmentMain extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.user,
             match:this.props.match,
             info: {
-              assignmentId: null,
-              name: null,
-              description: null,
-              due: new Date(),
-              status: null,
-              isTemplate: null,
+              assignmentId: '',
+              name: '',
+              description: '',
+              due: '',
+              status: '',
+              isTemplate: '',
               tasks: [],
             }, //data.courses[this.props.match.params.cId].assignments[this.props.match.params.aId],
         }
@@ -96,7 +97,7 @@ class AssignmentMain extends Component{
                     <h3>{this.state.info.description}</h3>
                     <h5>{this.state.info.status}</h5>
                     <h5>{this.state.info.due.toString()}</h5>
-                    <Tasks tasks={this.state.info.tasks} match={this.state.match}/>
+                    <Tasks tasks={this.state.info.tasks} match={this.state.match} user={this.state.user}/>
                 </div>
             </div>
         );
