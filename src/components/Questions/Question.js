@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from "react-router-dom";
+import { withRouter } from 'react-router';
+import { Link } from "react-router-dom";
 
 class Question extends Component{
     constructor(props){
@@ -40,4 +41,4 @@ class Question extends Component{
         );
     }
 }
-export default Question;
+export default withRouter(Question);

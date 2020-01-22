@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { MdAddCircle } from 'react-icons/md';
 import DateTimePicker from 'react-datetime-picker';
-
+import fire from '../../data/Fire';
 import Task from './Task';
 
 class Tasks extends Component{
@@ -11,8 +11,13 @@ class Tasks extends Component{
             user: this.props.user,
             creator: this.props.user.email,
             match: this.props.match,
-            tasks: this.props.tasks,
-            mode: this.props.tasks.length > 0 ? 'loading' : 'empty',
+            tasks: [],
+            mode: 'loading',
+            name: '',
+            type: '',
+            description: '',
+            dueDateSetBy: '',
+            due: '',
         }
     }
 
@@ -24,7 +29,7 @@ class Tasks extends Component{
           "type":  "pre-task",
           "description":  "answer each of the questions prior to completing your interview",
           "dueDateSetBy":  "instructor",
-          "scheduledEvent": {
+          "scheduledEvents": {
             "eventId": "0",
             "eventName":  "interview event",
             "location": {
@@ -32,7 +37,7 @@ class Tasks extends Component{
             "longitude":  "-86.153205",
             "name":  "At John Manager's Office"
             },
-            "dueDate":  "",
+            "due":  "",
             "creator":  "jomalair@iu.edu"
         },
  */
@@ -42,8 +47,59 @@ class Tasks extends Component{
        });
    };
 
-   createTask(){
+   componentDidMount() {
+     this.getTaskList();
+   }
 
+   createTask = e => {
+     console.log(this.state);
+     e.preventDefault();
+     let taskRef = fire.database().ref(`/courses/${this.state.match.params.cId}/assignments/${this.state.match.params.aId}/tasks/`);
+     let task = {
+       name: this.state.name,
+       type: this.state.type,
+       description: this.state.description,
+       dueDateSetBy: this.state.dueDateSetBy,
+       due: this.state.due.toString(),
+       creator: this.state.creator,
+     };
+     console.log(task);
+     taskRef.push(task).then(()=>{
+         this.getTaskList();
+     }).catch((error)=>{
+         console.log(`error:  ${error}`);
+     });
+   }
+
+   getTaskList = () => {
+     const { cId, aId } = this.state.match.params;
+     let taskRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/`);
+     let taskList = [];
+     taskRef.once('value', (snapshot) => {
+         //console.log(snapshot);
+         snapshot.forEach((child) => {
+             console.log(`task: ${child.val()}`);
+
+             taskList.push({
+                     cId: this.state.match.params.cId,
+                     aId:this.state.match.params.aId,
+                     taskId:child.key,
+                     name:child.val().name,
+                     type:child.val().type,
+                     description:child.val().description,
+                     dueDateSetBy:child.val().dueDateSetBy,
+                     due:child.val().due,
+                     creator:child.val().creator,
+                 });
+             });
+      console.log(taskList);
+         this.setState({
+             tasks: taskList,
+             mode: taskList.length === 0 ? 'empty' : 'full',
+         });
+     }).catch((error)=>{
+         console.log(`error: ${error}`);
+     });
    }
 
    handleChange = (e) => {
@@ -53,6 +109,11 @@ class Tasks extends Component{
        });
        console.log(this.state);
    };
+
+   onChange = date => {
+     console.log(date);
+     this.setState({ due: date });
+   }
 
    renderAddButton(){
        return(
@@ -66,8 +127,8 @@ class Tasks extends Component{
    renderAddMode(){
      return(
        <div style={styles.formStyle}>
-          <h1>Add Course</h1>
-          <form onSubmit={this.createAssignment} style={styles.formStyle}>
+          <h1>Add Task</h1>
+          <form onSubmit={this.createTask} style={styles.formStyle}>
               <div style={styles.formSectionStyle}>
                   <label>
                       Name:{'  '}
@@ -183,7 +244,11 @@ class Tasks extends Component{
             return(
                 <div>
                     <h1>Tasks</h1>
+                    <div style={styles.coursePack}>
+
                     {TaskPack}
+
+                    </div>
                     {this.renderAddButton()}
                 </div>
             );
@@ -210,13 +275,14 @@ const styles = {
     },
     formStyle: {
         display:'flex',
-        flexDirection:'row',
+        flexDirection:'column',
         width: '100%',
+        height: '80%',
     },
     formSectionStyle:{
         display:'flex',
-        alignItems:'flex-end',
-        justifyContent:'flex-end',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
         flexDirection:'column',
         marginRight:'150px',
         width: '100%',

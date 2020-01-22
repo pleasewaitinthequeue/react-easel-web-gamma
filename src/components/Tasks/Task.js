@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../../data/Theme.json';
+import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
 
 class Task extends Component{
@@ -42,13 +43,15 @@ class Task extends Component{
 
     render(){
         return(
-            <Link replace exact to={`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.taskId}/`}>
-                <div style={styles.cardStyle}>
-                    <p>{this.state.name}</p>
-                    <p>{this.state.type}</p>
-                    <p>{this.state.description}</p>
-                </div>
-            </Link>
+            <div>
+              <Link replace exact to={`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.taskId}/`}>
+                  <div style={styles.cardStyle}>
+                      <p>{this.state.name}</p>
+                      <p>{this.state.type}</p>
+                      <p>{this.state.description}</p>
+                  </div>
+              </Link>
+            </div>
         );
     }
 }
@@ -60,8 +63,9 @@ const styles = {
         height:'150px',
         width:'300px',
         padding:'5px',
+        margin:'5px',
         border:`1px solid ${Theme.colors.darkBlue}`,
     }
 };
 
-export default Task;
+export default withRouter(Task);

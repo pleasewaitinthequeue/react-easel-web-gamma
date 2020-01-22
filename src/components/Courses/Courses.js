@@ -290,13 +290,13 @@ const styles = {
     },
     formStyle: {
         display:'flex',
-        flexDirection:'row',
+        flexDirection:'column',
         width: '100%',
     },
     formSectionStyle:{
         display:'flex',
-        alignItems:'flex-end',
-        justifyContent:'flex-end',
+        alignItems:'flex-start',
+        justifyContent:'flex-start',
         flexDirection:'column',
         marginRight:'150px',
         width: '100%',

@@ -37,7 +37,7 @@ class CourseMain extends Component{
         }
     */
 
-    componentWillMount(){
+    componentDidMount(){
         this.getCourseInfo();
     }
 

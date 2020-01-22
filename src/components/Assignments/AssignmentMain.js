@@ -27,7 +27,6 @@ class AssignmentMain extends Component{
       let assignmentRef = fire.database().ref(`/courses/${cId}/assignments/${aId}`);
       return assignmentRef.once('value', (snapshot) => {
           console.log(`assignment details: ${snapshot.key} ${snapshot.val()}`);
-          let taskList = this.getTasks();
           this.setState({
             assignmentId: snapshot.key,
             name: snapshot.val().name,
@@ -35,29 +34,7 @@ class AssignmentMain extends Component{
             due: snapshot.val().due,
             status: snapshot.val().status,
             isTemplate: snapshot.val().isTemplate,
-            tasks: taskList,
           });
-      });
-    }
-
-    getTasks(){
-      const { aId, cId } = this.state.match.params;
-      let taskList = [];
-      let taskRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks`);
-      return taskRef.once('value', (snapshot) => {
-        snapshot.forEach((child) => {
-          taskList.push({
-            taskId: child.key,
-            name: child.val().name,
-            type: child.val().type,
-            description: child.val().description,
-            dueDateSetBy: child.val().dueDateSetBy,
-            scheduledEvent: {},
-            dueDate: child.val().dueDate,
-            creator: child.val().creator,
-          });
-        });
-        return taskList;
       });
     }
 
@@ -97,7 +74,7 @@ class AssignmentMain extends Component{
                     <h3>{this.state.info.description}</h3>
                     <h5>{this.state.info.status}</h5>
                     <h5>{this.state.info.due.toString()}</h5>
-                    <Tasks tasks={this.state.info.tasks} match={this.state.match} user={this.state.user}/>
+                    <Tasks match={this.state.match} user={this.state.user}/>
                 </div>
             </div>
         );
