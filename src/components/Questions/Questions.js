@@ -97,11 +97,6 @@ class Questions extends Component{
       console.log(this.state);
   };
 
-  onChange = date => {
-    console.log(date);
-    this.setState({ due: date });
-  }
-
   renderAddButton(){
       return(
           <div style={styles.addButtonStyle} onClick={this.addMode.bind(this)}>
@@ -114,8 +109,8 @@ class Questions extends Component{
   renderAddMode(){
     return(
       <div style={styles.formStyle}>
-         <h1>Add Task</h1>
-         <form onSubmit={this.createTask} style={styles.formStyle}>
+         <h1>Add Question</h1>
+         <form onSubmit={this.createQuestion} style={styles.formStyle}>
              <div style={styles.formSectionStyle}>
                  <label>
                      Number:{'  '}
@@ -129,27 +124,15 @@ class Questions extends Component{
                      />
                  </label>
                  <label>
-                   Type:  {'  '}
-                   <select
-                     value={this.state.type}
-                     onChange={(event) => this.setState({type: event.target.value})}
-                   >
-                     <option value=""></option>
-                     <option value="pre-task">pre-task</option>
-                     <option value="main-task">main-task</option>
-                     <option value="post-task">post-task</option>
-                   </select>
-                 </label>
-                 <label>
-                   Due Date Set By:  {'  '}
-                   <select
-                     value={this.state.dueDateSetBy}
-                     onChange={(event) => this.setState({dueDateSetBy: event.target.value})}
-                   >
-                     <option value=""></option>
-                     <option value="instructor">instructor</option>
-                     <option value="student">student</option>
-                   </select>
+                     Name:{'  '}
+                     <input
+                         name="name"
+                         style={styles.formInputStyle}
+                         type="text"
+                         defaultValue={this.state.name}
+                         onInput={this.handleChange}
+                         value={this.state.name}
+                     />
                  </label>
                  <label>
                      Description:{'  '}
@@ -163,25 +146,14 @@ class Questions extends Component{
                      />
                  </label>
                  <label>
-                   Status: {'  '}
+                   Answer Type:  {'  '}
                    <select
-                     value={this.state.status}
-                     onChange={(event) => this.setState({status: event.target.value})}
+                     value={this.state.type}
+                     onChange={(event) => this.setState({type: event.target.value})}
                    >
-                     <option value=""></option>
-                     <option value="draft">draft</option>
-                     <option value="public">public</option>
+                     <option value="text">text</option>
                    </select>
                  </label>
-                   <label>
-                     Creator: {'  '}
-                     <input
-                       name="creator"
-                       type="text"
-                       value={this.state.creator}
-                       onChange={() => this.setState({isTemplate: !this.state.isTemplate})}
-                     />
-                   </label>
                  <div>
                      <input
                          style={styles.chipInputStyle}
@@ -231,6 +203,7 @@ class Questions extends Component{
               <div style={styles.cardStyle}>
                   <p style={styles.textStyle}>Questions</p>
                   {QuestionPack}
+                  {this.renderAddButton()}
               </div>
 
 
@@ -243,6 +216,12 @@ class Questions extends Component{
 }
 
 const styles = {
+  addButtonStyle:{
+      display:'flex',
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent:'flex-start',
+  },
     cardStyle:{
         display:'flex',
         flexDirection:'column',

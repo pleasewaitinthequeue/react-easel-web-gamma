@@ -30,12 +30,10 @@ class Question extends Component{
     render(){
         const { cId, aId, tId } = this.state.match.params;
         return(
-            <Link replace exact
-                  to={`/c/${cId}/a/${aId}/t/${tId}/Questions/${this.state.questionId}`}
-            >
+            <Link replace exact to={`/c/${cId}/a/${aId}/t/${tId}/Questions/${this.state.questionId}`}>
                 <div>
-                    <h3>{this.state.name}</h3>
-                    <p>{this.state.description}</p>
+                    <h3>{this.state.number}{'.'}{'  '}{this.state.name}</h3>
+                    <p>{this.state.description} (using {this.state.answerType})</p>
                 </div>
             </Link>
         );
