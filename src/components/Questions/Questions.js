@@ -140,7 +140,7 @@ class Questions extends Component{
                          name="description"
                          style={styles.formInputStyle}
                          type="text"
-                         placeholder="Interview a Professional in your Field"
+                         placeholder="Describe the question you are asking."
                          onInput={this.handleChange}
                          value={this.state.description}
                      />

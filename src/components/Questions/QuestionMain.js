@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import fire from '../../data/Fire';
 import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
 import {Link} from "react-router-dom";
+import AnswerText from './../Answers/AnswerText';
 
 class QuestionMain extends Component{
     constructor(props){
@@ -52,6 +53,14 @@ class QuestionMain extends Component{
         console.log(this.state);
     };
 
+    questionAnswered = (status, mode) => {
+      this.setState({
+        status,
+        mode,
+      });
+      this.updateQuestion();
+    }
+
     getQuestionInfo(){
       const { aId, cId, tId, qId } = this.state.match.params;
       let questionRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/${tId}/questions/${qId}`);
@@ -97,31 +106,6 @@ class QuestionMain extends Component{
 
     answerQuestion = () => {
       this.setState({ mode: 'answering' });
-    }
-
-    createAnswer = (e) => {
-      const { cId, aId, tId, qId } = this.state.match.params;
-      let user = fire.auth().currentUser;
-      e.preventDefault();
-      let answerRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/${tId}/questions/${qId}/answers/`);
-      let answer = {
-        answerer:  user.email,
-        title:  '',
-        caption:  '',
-        description: this.state.answer,
-        url:  '',
-        answerType: this.state.answerType,
-      };
-
-      answerRef.push(answer).then(()=>{
-          this.setState({
-            status: 'complete',
-            mode:'loaded'
-          });
-          this.updateQuestion();
-      }).catch((error)=>{
-          console.log(`error:  ${error}`);
-      });
     }
 
     updateQuestion(key, value){
@@ -193,47 +177,35 @@ class QuestionMain extends Component{
                 </div>
             );
           case 'answering':
-          return (
-              <div>
-                  <div>
-                      <Link exact="true" replace to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
-                      <Link exact="true" replace to={`/Courses/${cId}`}>Course</Link>{' '}>{' '}
-                      <Link exact="true" replace to={`/c/${cId}/Assignments/${aId}`}>Assignment</Link>{' '}>{' '}
-                      <Link exact="true" replace to={`/c/${cId}/a/${aId}/Tasks/${tId}`}>Task</Link>{' '}>{' '}
-                      <Link exact="true" replace to={`/c/${cId}/a/${aId}/t/${tId}/Questions/${qId}`}>Question</Link>
-                  </div>
-                  <div>
-                      <h2>{this.state.number}{'.'}{'  '}{this.state.name}</h2>
-                      <h4>{this.state.description}</h4>
-                      {this.renderIcon()}
-                  </div>
-                  <div>
-                    <form onSubmit={this.createAnswer} style={styles.formStyle}>
-                      <div style={styles.formSectionStyle}>
-                        <label>
-                            Answer:{'  '}
-                            <textarea
-                                name="answer"
-                                rows="10"
-                                cols="120"
-                                type="text"
-                                placeholder="Record Answer in full sentences."
-                                onInput={this.handleChange}
-                                value={this.state.answer}
-                            />
-                        </label>
-                      </div>
+            switch(this.state.answerType){
+              case 'text':
+                return (
+                    <AnswerText
+                      cId={this.state.cId}
+                      aId={this.state.aId}
+                      tId={this.state.tId}
+                      qId={this.state.qId}
+                      match={this.state.match}
+                      name={this.state.name}
+                      description={this.state.description}
+                      number={this.state.number}
+                      answerType={this.state.answerType}
+                      action={this.questionAnswered}
+                    />
+                );
+                break;
+              case 'likert':
+                return (
+                  <h1>Ope, something went wrong</h1>
+                );
+                break;
+              default:
+                return (
+                  <h1>Ope, something went wrong</h1>
+                );
+                break;
+            }
 
-                      <div>
-                          <input
-                              style={styles.chipInputStyle}
-                              type="submit"
-                          />
-                      </div>
-                    </form>
-                  </div>
-              </div>
-          );
           default:
             return null;
         }
