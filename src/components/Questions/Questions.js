@@ -109,24 +109,35 @@ class Questions extends Component{
       );
   }
 
-  showURLInputBox(){
-    if(this.state.answerType == 'url'){
+  showContentInputBox(){
+    switch(this.state.answerType){
+      case 'video':
       return(
-        <label>
-         URL: {'  '}
-         <textarea
-             name="url"
-             rows="10"
-             cols="120"
-             type="text"
-             placeholder="Place full Embed Text from Youtube or other Video Platform"
-             onInput={this.handleChange}
-             value={this.state.url}
-         />
-        </label>
-      );
-    } else {
-      return null;
+          <label>
+           URL: {'  '}
+           <textarea
+               name="url"
+               rows="10"
+               cols="120"
+               type="text"
+               placeholder="Submit the Unique Id for your Youtube Video - a group of letters and numbers at the end of the URL"
+               onInput={this.handleChange}
+               value={this.state.url}
+           />
+          </label>
+        );
+      case 'url':
+        return (
+          <input
+            name="url"
+            type="text"
+            placeholder="Submit the External Link"
+            onInput={this.handleChange}
+            value={this.state.url}
+          />
+        );
+      default:
+        return null;
     }
   }
 
@@ -178,9 +189,10 @@ class Questions extends Component{
                      <option value="text">text</option>
                      <option value="likert">likert</option>
                      <option value="url">url</option>
+                     <option value="youtube">youtube</option>
                    </select>
                  </label>
-                 {this.showURLInputBox()}
+                 {this.showContentInputBox()}
                  <div>
                      <input
                          style={styles.chipInputStyle}

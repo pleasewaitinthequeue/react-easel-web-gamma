@@ -229,6 +229,22 @@ class QuestionMain extends Component{
                     action={this.questionAnswered}
                   />
                 );
+              case 'youtube':
+                return(
+                  <AnswerLink
+                    cId={this.state.cId}
+                    aId={this.state.aId}
+                    tId={this.state.tId}
+                    qId={this.state.qId}
+                    match={this.state.match}
+                    name={this.state.name}
+                    description={this.state.description}
+                    number={this.state.number}
+                    answerType={this.state.answerType}
+                    url={this.state.url}
+                    action={this.questionAnswered}
+                  />
+                );
               default:
                 return (
                   <h1>Ope, something went wrong</h1>

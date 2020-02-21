@@ -46,6 +46,28 @@ class AnswerLikert extends Component{
       console.log(this.state);
   };
 
+  renderContent(){
+    switch(this.state.answerType){
+      case "video":
+        return(
+          <div>
+            <Youtube video={this.state.url} />
+            <div>
+              {this.state.description}
+            </div>
+          </div>
+        );
+      case "url":
+        return(
+          <div>
+            <a href={this.state.url} target="blank">{this.state.description}</a>
+          </div>
+        );
+      default:
+        return null;
+    }
+  }
+
   render(){
     const { aId, cId, tId, qId } = this.state.match.params;
     return (
@@ -59,13 +81,14 @@ class AnswerLikert extends Component{
           </div>
           <div>
               <h2>{this.state.number}{'.'}{'  '}{this.state.name}</h2>
-              <div>
-                <Youtube video={this.state.url} />
-              </div>
+              {this.renderContent()}
           </div>
-          <div>
-            {this.state.description}
-          </div>
+
+          <Link exact="true" replace to={`/c/${cId}/a/${aId}/Tasks/${tId}`}>
+            <div>
+            I'm Done
+            </div>
+          </Link>
       </div>
     );
   }
