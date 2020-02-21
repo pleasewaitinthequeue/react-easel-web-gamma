@@ -13,6 +13,7 @@ class Questions extends Component{
             name: '',
             description: '',
             answerType: '',
+            url: '',
             status: '',
             questions: [],
         }
@@ -47,6 +48,7 @@ class Questions extends Component{
       number: this.state.number,
       name: this.state.name,
       description: this.state.description,
+      url: this.state.url,
       answerType: this.state.answerType,
       status: 'incomplete',
     };
@@ -74,6 +76,7 @@ class Questions extends Component{
                     number: child.val().number,
                     name:child.val().name,
                     description:child.val().description,
+                    url: child.val().url,
                     answerType: child.val().answerType,
                     status: child.val().status,
                 });
@@ -104,6 +107,27 @@ class Questions extends Component{
               <p>Add Question</p>
           </div>
       );
+  }
+
+  showURLInputBox(){
+    if(this.state.answerType == 'url'){
+      return(
+        <label>
+         URL: {'  '}
+         <textarea
+             name="url"
+             rows="10"
+             cols="120"
+             type="text"
+             placeholder="Place full Embed Text from Youtube or other Video Platform"
+             onInput={this.handleChange}
+             value={this.state.url}
+         />
+        </label>
+      );
+    } else {
+      return null;
+    }
   }
 
   renderAddMode(){
@@ -148,12 +172,15 @@ class Questions extends Component{
                  <label>
                    Answer Type:  {'  '}
                    <select
-                     value={this.state.type}
-                     onChange={(event) => this.setState({type: event.target.value})}
+                     value={this.state.answerType}
+                     onChange={(event) => this.setState({answerType: event.target.value})}
                    >
                      <option value="text">text</option>
+                     <option value="likert">likert</option>
+                     <option value="url">url</option>
                    </select>
                  </label>
+                 {this.showURLInputBox()}
                  <div>
                      <input
                          style={styles.chipInputStyle}

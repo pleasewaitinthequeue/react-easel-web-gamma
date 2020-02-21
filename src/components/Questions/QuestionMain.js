@@ -4,6 +4,8 @@ import fire from '../../data/Fire';
 import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
 import {Link} from "react-router-dom";
 import AnswerText from './../Answers/AnswerText';
+import AnswerLikert from './../Answers/AnswerLikert';
+import AnswerLink from './../Answers/AnswerLink';
 
 class QuestionMain extends Component{
     constructor(props){
@@ -15,6 +17,7 @@ class QuestionMain extends Component{
             name: '',
             description: '',
             answerType: '',
+            url: '',
             status: '',
         }
     }
@@ -76,6 +79,7 @@ class QuestionMain extends Component{
             description: snapshot.val().description,
             answerType: snapshot.val().answerType,
             status: snapshot.val().status,
+            url: snapshot.val().url,
             mode: 'loaded',
             answer: '',
           });
@@ -196,7 +200,34 @@ class QuestionMain extends Component{
                 break;
               case 'likert':
                 return (
-                  <h1>Ope, something went wrong</h1>
+                  <AnswerLikert
+                    cId={this.state.cId}
+                    aId={this.state.aId}
+                    tId={this.state.tId}
+                    qId={this.state.qId}
+                    match={this.state.match}
+                    name={this.state.name}
+                    description={this.state.description}
+                    number={this.state.number}
+                    answerType={this.state.answerType}
+                    action={this.questionAnswered}
+                  />
+                );
+              case 'url':
+                return(
+                  <AnswerLink
+                    cId={this.state.cId}
+                    aId={this.state.aId}
+                    tId={this.state.tId}
+                    qId={this.state.qId}
+                    match={this.state.match}
+                    name={this.state.name}
+                    description={this.state.description}
+                    number={this.state.number}
+                    answerType={this.state.answerType}
+                    url={this.state.url}
+                    action={this.questionAnswered}
+                  />
                 );
               default:
                 return (
