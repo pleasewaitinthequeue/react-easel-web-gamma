@@ -49,11 +49,11 @@ class Courses extends Component{
         courseRef.once('value', (snapshot) =>{
             console.log(snapshot);
             snapshot.forEach((child) =>{
-                console.log(`course: ${child.val()}`);
+                let managers = child.val().managers;
+                let students = child.val().students;
+                let owner = child.val().owner;
                 if(
-                    child.val().owner === this.state.user.email ||
-                    child.val().managers.includes(this.state.user.email) ||
-                    child.val().students.includes(this.state.user.email)
+                    this.validateMembership(owner, managers, students)
                 ){
                     courseList.push({
                         courseId:child.key,
@@ -76,6 +76,21 @@ class Courses extends Component{
             console.log(`error: ${error}`);
         });
     };
+
+    validateMembership = (owner, managers, students) => {
+      let user = this.state.user.email;
+      if(owner === user){
+        return true;
+      } else if (managers && students) {
+        if(managers.includes(user) || students.includes(user) || owner === user){
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    }
 
     handleChipListStateChange = ( name, payload ) => {
         console.log(`${name}:  ${JSON.stringify(payload)}`);

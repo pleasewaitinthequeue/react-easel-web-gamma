@@ -48,7 +48,7 @@ class AnswerLikert extends Component{
 
   renderContent(){
     switch(this.state.answerType){
-      case "video":
+      case "youtube":
         return(
           <div>
             <Youtube video={this.state.url} />

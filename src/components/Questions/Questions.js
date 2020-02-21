@@ -111,7 +111,7 @@ class Questions extends Component{
 
   showContentInputBox(){
     switch(this.state.answerType){
-      case 'video':
+      case 'youtube':
       return(
           <label>
            URL: {'  '}
