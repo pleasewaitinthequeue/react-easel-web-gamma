@@ -3,6 +3,9 @@
 # firebase api key
 /src/data/Fire.js
 
+# firebase cache
+.firebase/hosting.*
+
 # dependencies
 /node_modules
 /.pnp

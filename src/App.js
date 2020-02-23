@@ -17,6 +17,7 @@ import Theme from './data/Theme.json';
 import AssignmentMain from './components/Assignments/AssignmentMain';
 import TaskMain from './components/Tasks/TaskMain';
 import QuestionMain from './components/Questions/QuestionMain';
+import Timer from './components/common/Timer';
 
 class App extends Component{
     state = { loading: true, authenticated: false, currentUser: null};
@@ -88,6 +89,9 @@ class App extends Component{
                                           authenticated={authenticated} user={currentUser}/>
                             <PrivateRoute path='/c/:cId/a/:aId/t/:tId/Questions/:qId' component={QuestionMain}
                                           authenticated={authenticated} user={currentUser}/>
+                        </div>
+                        <div>
+                          <Timer />
                         </div>
                         <Footer />
                     </div>
