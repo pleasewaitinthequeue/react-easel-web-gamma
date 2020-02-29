@@ -17,6 +17,7 @@ import Theme from './data/Theme.json';
 import AssignmentMain from './components/Assignments/AssignmentMain';
 import TaskMain from './components/Tasks/TaskMain';
 import QuestionMain from './components/Questions/QuestionMain';
+import Timer from './components/common/Timer';
 
 class App extends Component{
     state = { loading: true, authenticated: false, currentUser: null};
@@ -51,6 +52,18 @@ class App extends Component{
             .catch((error) => {
                 console.log(`error:  ${error}`)
             });
+    }
+
+    renderTimer(){
+      if(this.state.authenticated){
+        return(
+          <div>
+            <Timer />
+          </div>
+        );
+      } else {
+        return null;
+      }
     }
 
     render() {
@@ -89,6 +102,7 @@ class App extends Component{
                             <PrivateRoute path='/c/:cId/a/:aId/t/:tId/Questions/:qId' component={QuestionMain}
                                           authenticated={authenticated} user={currentUser}/>
                         </div>
+                        {this.renderTimer()}
                         <Footer />
                     </div>
                 </Router>
@@ -120,6 +134,7 @@ const styles = {
         backgroundColor:`${Theme.colors.whiteBlue}`,
     },
     appStyle:{
+        position:'relative',
         height:'100%',
         width:'100%',
         margin:'0px',

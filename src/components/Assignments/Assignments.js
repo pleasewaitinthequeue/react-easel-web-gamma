@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DateTimePicker from 'react-datetime-picker';
 import { MdAddCircle } from 'react-icons/md';
+import Theme from '../../data/Theme.json';
 import fire from '../../data/Fire';
 import Assignment from './Assignment';
 
@@ -170,7 +171,12 @@ class Assignments extends Component{
 
     renderAddButton(){
         return(
-            <div style={styles.addButtonStyle} onClick={this.addMode.bind(this)}>
+            <div
+              style={this.state.button ? styles.addButtonStyleHover : styles.addButtonStyle}
+              onClick={this.addMode.bind(this)}
+              onMouseOver={()=> this.setState({button: true})}
+              onMouseLeave={()=> this.setState({button: false})}
+            >
                 <MdAddCircle/>
                 <p>Add Assignment</p>
             </div>
@@ -194,27 +200,29 @@ class Assignments extends Component{
         switch(this.state.mode){
           case 'empty':
             return (
-                <div>
+                <div style={styles.coursePack}>
                     <h3>No Assignments to Display.</h3>
                     {this.renderAddButton()}
                 </div>
             );
           case 'full':
             return(
-                <div>
+              <div>
+                <div style={styles.coursePack}>
                     {AssignmentPack}
-                    {this.renderAddButton()}
                 </div>
+                {this.renderAddButton()}
+              </div>
             );
           case 'adding':
             return (
-                <div>
+                <div style={styles.coursePack}>
                   {this.renderAddAssignment()}
                 </div>
               );
           case 'loading':
             return (
-                <div>
+                <div style={styles.coursePack}>
                     <h3>Loading......</h3>
                 </div>
             );
@@ -232,6 +240,15 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
+    },
+    addButtonStyleHover:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start',
+        backgroundColor: "#1c4c79",
+        color:`${Theme.colors.whiteBlue}`,
+        borderRadius:"2px",
     },
     coursePack:{
         display:'flex',

@@ -148,7 +148,12 @@ class Courses extends Component{
 
     renderAddButton(){
         return(
-            <div style={styles.addButtonStyle} onClick={this.addMode.bind(this)}>
+            <div
+              style={this.state.addButtonMode ? styles.addButtonStyleHover : styles.addButtonStyle}
+              onClick={this.addMode.bind(this)}
+              onMouseOver={()=>this.setState({addButtonMode:true})}
+              onMouseLeave={()=>this.setState({addButtonMode:false})}
+            >
                 <MdAddCircle/>
                 <p>Add Course</p>
             </div>
@@ -295,6 +300,15 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
+    },
+    addButtonStyleHover:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start',
+        backgroundColor: "#1c4c79",
+        color:"#ecf4ff",
+        borderRadius:"2px",
     },
     coursePack:{
         display:'flex',

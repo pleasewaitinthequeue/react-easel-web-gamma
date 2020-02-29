@@ -53,11 +53,13 @@ class Course extends Component{
 const styles = {
     cardStyle:{
         height:'150px',
-        width:'150px',
+        width:'300px',
         border:`1px solid ${Theme.colors.darkBlue}`,
         display:'flex',
         flexDirection:'column',
         margin:'5px',
+        borderRadius:'2px',
+        boxShadow:`2px 2px ${Theme.colors.darkBlue}`
     }
 };
 

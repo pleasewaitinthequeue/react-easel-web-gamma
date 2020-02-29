@@ -117,7 +117,12 @@ class Tasks extends Component{
 
    renderAddButton(){
        return(
-           <div style={styles.addButtonStyle} onClick={this.addMode.bind(this)}>
+           <div
+            style={this.state.button ? styles.addButtonStyleHover : styles.addButtonStyle}
+            onClick={this.addMode.bind(this)}
+            onMouseOver={() => this.setState({button: true})}
+            onMouseLeave={() => this.setState({button: false})}
+            >
                <MdAddCircle/>
                <p>Add Task</p>
            </div>
@@ -265,6 +270,15 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
+    },
+    addButtonStyleHover:{
+        display:'flex',
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent:'flex-start',
+        backgroundColor: "#1c4c79",
+        color:"#ecf4ff",
+        borderRadius:"2px",
     },
     coursePack:{
         display:'flex',
