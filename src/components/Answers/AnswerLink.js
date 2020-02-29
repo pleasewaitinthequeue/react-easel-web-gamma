@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../../data/Fire';
-import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
+//import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
 import {Link} from "react-router-dom";
 import Youtube from './../common/Youtube';
 
@@ -93,7 +93,7 @@ class AnswerLikert extends Component{
     );
   }
 }
-
+/*
 const styles = {
     iconStyle:{
         height:'25px',
@@ -141,5 +141,5 @@ const styles = {
         height:'300px',
     },
 }
-
+*/
 export default AnswerLikert;

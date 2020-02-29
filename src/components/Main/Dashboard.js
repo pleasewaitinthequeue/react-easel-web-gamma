@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Courses from '../Courses/Courses';
 import {Link} from "react-router-dom";
+import Timer from './../common/Timer';
 //import fire from '../../data/Fire';
 
 class Dashboard extends Component{
@@ -38,6 +39,9 @@ class Dashboard extends Component{
                 <p>to your Course Dashboard</p>
                 <div style={styles.dashboardContainer}>
                     <Courses user={this.state.user} />
+                </div>
+                <div>
+                  <Timer />
                 </div>
             </div>
         );

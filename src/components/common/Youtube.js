@@ -13,6 +13,8 @@ class Youtube extends Component{
     return(
       <div style={styles.videoStyle}>
         <iframe
+          id={this.state.video}
+          title={this.state.video}
           type="text/html"
           width="100%"
           height="100%"

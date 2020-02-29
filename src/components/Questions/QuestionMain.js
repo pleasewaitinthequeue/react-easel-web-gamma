@@ -197,7 +197,6 @@ class QuestionMain extends Component{
                       action={this.questionAnswered}
                     />
                 );
-                break;
               case 'likert':
                 return (
                   <AnswerLikert
@@ -249,7 +248,6 @@ class QuestionMain extends Component{
                 return (
                   <h1>Ope, something went wrong</h1>
                 );
-                break;
             }
 
           default:

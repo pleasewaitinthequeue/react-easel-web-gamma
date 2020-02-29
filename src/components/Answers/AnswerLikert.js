@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fire from '../../data/Fire';
-import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
+//import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
 import {Link} from "react-router-dom";
 
 class AnswerLikert extends Component{
