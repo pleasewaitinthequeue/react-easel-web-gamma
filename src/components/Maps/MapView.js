@@ -18,23 +18,23 @@ class MapView extends Component {
   }
 
   componentWillUpdate(){
-    this.getGeoLocation()
+    this.getGeoLocation();
   }
 
   componentDidMount() {
-    this.delayedShowMarker()
+    this.delayedShowMarker();
   }
 
   delayedShowMarker = () => {
     setTimeout(() => {
-      this.getGeoLocation()
-      this.setState({ isMarkerShown: true })
-    }, 5000)
+      this.getGeoLocation();
+      this.setState({ isMarkerShown: true });
+    }, 5000);
   }
 
   handleMarkerClick = () => {
-    this.setState({ isMarkerShown: false })
-    this.delayedShowMarker()
+    this.setState({ isMarkerShown: false });
+    this.delayedShowMarker();
   }
 
   getGeoLocation = () => {
@@ -48,11 +48,9 @@ class MapView extends Component {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     }
-                }))
+                }));
             }
-        )
-    } else {
-        error => console.log(error)
+        );
     }
   }
 

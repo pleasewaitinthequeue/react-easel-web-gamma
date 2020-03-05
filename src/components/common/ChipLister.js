@@ -98,7 +98,7 @@ class ChipLister extends Component{
         }
     }
 
-    componentWillUpdate(){
+    componentDidUpdate(){
         if(this.state.emails !== this.props.emails){
             this.props.handleChipListStateChange(this.state.name,this.state.emails);
         }

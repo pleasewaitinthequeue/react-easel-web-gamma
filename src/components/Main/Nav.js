@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import fire from '../../data/Fire';
 import Theme from '../../data/Theme.json';
-import { MdDashboard, MdInfo, MdContactMail, MdPerson } from "react-icons/md";
+import { MdDashboard, MdInfo, MdContactMail, MdPerson, MdNotifications } from "react-icons/md";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import EaselLogo from '../../assets/images/easel_logo.png';
 
@@ -85,6 +85,10 @@ class Nav extends Component{
                             <Link to={"/"}>Dashboard</Link>
                         </div>
                         <div style={styles.linkStyle}>
+                          <MdNotifications />{'  '}
+                          <Link to={"/Notifications"}>Notifications</Link>
+                        </div>
+                        <div style={styles.linkStyle}>
                             <MdInfo />{'  '}
                             <Link to={"/About"}>About</Link>
                         </div>
@@ -135,6 +139,7 @@ const styles = {
         height:'100%',
         margin:'0px',
         backgroundColor:`${Theme.colors.whiteBlue}`,
+        color:Theme.colors.darkBlue,
         opacity:1,
         zIndex:1,
     },
@@ -147,6 +152,7 @@ const styles = {
         height: '100%',
         margin:'0px',
         backgroundColor:`${Theme.colors.whiteBlue}`,
+        color:Theme.colors.darkBlue,
         opacity:1,
         zIndex:1,
     },
@@ -158,6 +164,9 @@ const styles = {
         height:'100%',
         margin:'5px',
         padding:'5px',
+        //backgroundColor: Theme.colors.whiteBlue,
+        color: Theme.colors.darkBlue,
+        //borderBottom: `5px solid ${Theme.colors.darkBlue}`,
     },
     imageStyle:{
         height:'70px',

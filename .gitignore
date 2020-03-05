@@ -2,6 +2,8 @@
 
 # firebase api key
 /src/data/Fire.js
+# google maps api key
+/src/data/Maps.js
 
 # firebase cache
 .firebase/hosting.*

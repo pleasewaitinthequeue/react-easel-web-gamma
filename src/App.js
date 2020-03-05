@@ -18,6 +18,7 @@ import AssignmentMain from './components/Assignments/AssignmentMain';
 import TaskMain from './components/Tasks/TaskMain';
 import QuestionMain from './components/Questions/QuestionMain';
 import Timer from './components/common/Timer';
+import NotificationManager from './components/Notifications/NotificationManager';
 
 class App extends Component{
     state = { loading: true, authenticated: false, currentUser: null};
@@ -90,6 +91,8 @@ class App extends Component{
                             <Route exact path='/SignOut' component={(SignOut)} authenticated={false} user={null}/>
                             {/* Private Route Paths = Requires Authentication */}
                             <PrivateRoute exact path='/Dashboard' component={Dashboard} authenticated={authenticated}
+                                          user={currentUser}/>
+                            <PrivateRoute exact path='/Notifications' component={NotificationManager} authenticated={authenticated}
                                           user={currentUser}/>
                             <PrivateRoute exact path='/Profile' component={Profile} authenticated={authenticated}
                                           user={currentUser}/>
