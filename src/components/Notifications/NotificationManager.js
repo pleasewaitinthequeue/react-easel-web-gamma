@@ -3,24 +3,26 @@ import Theme from './../../data/Theme';
 //import Slider from './../common/Slider';
 //import MapView from './../common/MapView';
 //import Map from './../common/GoogleMapReact';
-import Map from './../Maps/ReactMapGL';
+//import Map from './../Maps/ReactMapGL';
+import Notifications from './Notifications';
 
 class NotificationManager extends Component{
   constructor(props){
     super(props);
     this.state = {
-      latitude: 39.768498365633114,
-      longitude: -86.15802974992113,
-      zoom: 15,
-      radius: 10,
+      //latitude: 39.768498365633114,
+      //longitude: -86.15802974992113,
+      //zoom: 15,
+      //radius: 10,
     }
   }
 
-  onStateChange = (latitude, longitude, zoom) => {
-    this.setState({latitude, longitude, zoom});
-  }
+  //onStateChange = (latitude, longitude, zoom) => {
+    //this.setState({latitude, longitude, zoom});
+  //}
 
   render(){
+    {/*
     return(
       <div>
         <h1>Notification Manager</h1>
@@ -34,6 +36,10 @@ class NotificationManager extends Component{
           />
         </div>
       </div>
+    );
+    */}
+    return(
+      <Notifications />
     );
   }
 }
