@@ -12,12 +12,17 @@ class Notifications extends Component{
     super(props);
     this.state = {
       mode: 'loading',
+      sender: fire.auth().currentUser.email,
       notifications: null,
       recipients: [],
       latitude: 39.768498365633114,
       longitude: -86.15802974992113,
+      startdate: new Date(),
       zoom: 15,
       radius: 10,
+      height: '60vh',
+      width: '90vw',
+      type: 'time',
     }
   }
 
@@ -49,21 +54,33 @@ class Notifications extends Component{
     e.preventDefault();
     let notificationRef = fire.database().ref(`/notifications/`);
     let notification = {
-      notificationId:this.state.notificationId,
       sender:this.state.sender,
       recipients:this.state.recipients,
       latitude:this.state.latitude,
       longitude:this.state.longitude,
       radius:this.state.radius,
       zoom:this.state.zoom,
-      start:this.state.start,
+      startdate:this.state.startdate.toString(),
       duration:this.state.duration,
+      type:this.state.type,
     };
+
     notificationRef.push(notification).then(()=>{
         this.getNotificationList();
     }).catch((error)=>{
         console.log(`error:  ${error}`);
     });
+  }
+
+  notificationMembership = (sender, recipients) => {
+    let email = fire.auth().currentUser.email;
+    if(email === sender){
+      return true;
+    } else if(recipients.includes(email)){
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getNotificationList = () => {
@@ -73,17 +90,20 @@ class Notifications extends Component{
       notificationRef.once('value', (snapshot) =>{
           console.log(snapshot);
           snapshot.forEach((child) =>{
-              notificationList.push({
-                  notificationId:child.key,
-                  sender:child.val().sender,
-                  recipients:child.val().recipients,
-                  latitude:child.val().latitude,
-                  longitude:child.val().longitude,
-                  radius:child.val().radius,
-                  zoom:child.val().zoom,
-                  start:child.val().start,
-                  duration:child.val().duration,
-              });
+              if(this.notificationMembership(child.val().sender, child.val().recipients)){
+                notificationList.push({
+                    notificationId:child.key,
+                    sender:child.val().sender,
+                    recipients:child.val().recipients,
+                    latitude:child.val().latitude,
+                    longitude:child.val().longitude,
+                    radius:child.val().radius,
+                    zoom:child.val().zoom,
+                    startdate:child.val().startdate,
+                    duration:child.val().duration,
+                    type:child.val().type,
+                });
+              }
             });
           this.setState({
             notifications: notificationList,
@@ -108,12 +128,90 @@ class Notifications extends Component{
   }
 
   onChange = (date) => {
-    //console.log(date);
-    this.setState({ start: date });
+    console.log(date);
+    this.setState({ startdate: date });
+    console.log(this.state.startdate);
   }
 
   notificationForm = () => {
-    return(
+    switch(this.state.type){
+      case 'space':
+        return(
+          <div style={styles.formStyle}>
+              <form onSubmit={this.createNotification} style={styles.formStyle}>
+                  <div style={styles.formSectionStyle}>
+                    <div>
+                      <label>
+                          Sender:{'  '}
+                          <input
+                              name="owner"
+                              style={styles.formInputStyle}
+                              type="text"
+                              placeholder="user@example.com"
+                              onInput={this.handleChange}
+                              value={this.state.sender}
+                          />
+                      </label>
+                    </div>
+                    <div>
+                      <label>
+                        Recipients({this.state.recipients == null ? 0 : this.state.recipients.length}):{'  '}
+                        <div style={styles.chipContainerStyle}>
+                        <ChipLister
+                            divStyle={styles.chipDivStyle}
+                            inputStyle={styles.chipInputStyle}
+                            handleChipListStateChange={this.handleChipListStateChange}
+                            emails={this.state.recipients}
+                            name="recipients"
+                        />
+                        </div>
+                      </label>
+                    </div>
+                    <div>
+                      <label>
+                        Date/Time:{'  '}
+                        <DateTimePicker
+                          onChange={this.onChange}
+                          value={this.state.startdate}
+                        />
+                      </label>
+                    </div>
+                    <div>
+                      <label>
+                          Notify in Advance:{'  '}
+                          <input
+                              name="duration"
+                              //style={styles.formInputStyle}
+                              type="number"
+                              placeholder="0"
+                              onInput={this.handleChange}
+                              value={this.state.duration}
+                          />
+                      </label>
+                    </div>
+                  </div>
+                  <div>
+                    <Map
+                      onStateChange={this.onStateChange}
+                      latitude={this.state.latitude}
+                      longitude={this.state.longitude}
+                      zoom={this.state.zoom}
+                      radius={this.state.radius}
+                      height={this.state.height}
+                      width={this.state.width}
+                    />
+                  </div>
+                    <div>
+                        <input
+                            style={styles.chipInputStyle}
+                            type="submit"
+                        />
+                    </div>
+                  </form>
+                </div>
+      );
+    case 'time':
+      return(
         <div style={styles.formStyle}>
             <form onSubmit={this.createNotification} style={styles.formStyle}>
                 <div style={styles.formSectionStyle}>
@@ -149,13 +247,13 @@ class Notifications extends Component{
                       Date/Time:{'  '}
                       <DateTimePicker
                         onChange={this.onChange}
-                        value={this.state.start}
+                        value={this.state.startdate}
                       />
                     </label>
                   </div>
                   <div>
                     <label>
-                        Notify in Advance:{'  '}
+                        Duration:{'  '}
                         <input
                             name="duration"
                             //style={styles.formInputStyle}
@@ -167,15 +265,6 @@ class Notifications extends Component{
                     </label>
                   </div>
                 </div>
-                <div>
-                  <Map
-                    onStateChange={this.onStateChange}
-                    latitude={this.state.latitude}
-                    longitude={this.state.longitude}
-                    zoom={this.state.zoom}
-                    radius={this.state.radius}
-                  />
-                </div>
                   <div>
                       <input
                           style={styles.chipInputStyle}
@@ -184,7 +273,16 @@ class Notifications extends Component{
                   </div>
                 </form>
               </div>
-    );
+      );
+    }
+  }
+
+  handleChange = (e) => {
+      e.preventDefault();
+      this.setState({
+          [e.target.name]:e.target.value,
+      });
+      //console.log(this.state);
   }
 
   componentWillMount(){
@@ -217,8 +315,9 @@ class Notifications extends Component{
               longitude={n.longitude}
               radius={n.radius}
               zoom={n.zoom}
-              start={n.start}
+              startdate={n.startdate}
               duration={n.duration}
+              type={n.type}
             />
         );
         return (
@@ -233,6 +332,11 @@ class Notifications extends Component{
         return (
           <div>
             <h1>Add a Notification</h1>
+            <label>Time Based Notification: </label>
+            <input type='radio' onInput={this.handleChange} name='type' value='time'/>
+            {'  '}
+            <label>Location Based Notification </label>
+            <input type='radio' onInput={this.handleChange} name='type' value='space'/>
             {this.notificationForm()}
           </div>
         );
@@ -248,6 +352,7 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
+        color:`${Theme.colors.darkBlue}`
     },
     addButtonStyleHover:{
         display:'flex',

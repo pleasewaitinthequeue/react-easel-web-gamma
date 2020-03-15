@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import data from '../../data/Courses.json';
 import Assignments from '../Assignments/Assignments';
+import Theme from '../../data/Theme.json';
 import {Link} from "react-router-dom";
 import fire from "../../data/Fire";
 
@@ -64,11 +65,11 @@ class CourseMain extends Component{
         const { cId } = this.state.match.params;
         return(
             <div>
-                <div>
+                <div style={styles.courseMain}>
                     <Link replace exact to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
                     <Link exact replace to={`/Courses/${cId}`}>Course</Link>
                 </div>
-                <div>
+                <div styles={styles.courseMain}>
                     <h1>{this.state.name}</h1>
                     <h3>{this.state.title}</h3>
                     <p>{this.state.description}</p>
@@ -79,6 +80,12 @@ class CourseMain extends Component{
             </div>
         );
     }
+}
+
+const styles = {
+  courseMain:{
+    color:`${Theme.colors.darkBlue}`,
+  }
 }
 
 export default CourseMain;

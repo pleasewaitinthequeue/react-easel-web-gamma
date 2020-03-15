@@ -12,8 +12,8 @@ class Map extends Component {
     this.state = {
       mode: 'loading',
       viewport: {
-        width: "90vw",
-        height: "60vh",
+        width: this.props.width,
+        height: this.props.height,
         latitude: this.props.latitude,
         longitude: this.props.longitude,
         zoom: this.props.zoom,

@@ -59,8 +59,9 @@ const styles = {
         flexDirection:'column',
         margin:'5px',
         borderRadius:'2px',
-        boxShadow:`2px 2px ${Theme.colors.darkBlue}`
+        boxShadow:`2px 2px ${Theme.colors.darkBlue}`,
+        color:`${Theme.colors.darkBlue}`,
     }
-};
+}
 
 export default withRouter(Course);

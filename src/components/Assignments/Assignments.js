@@ -95,7 +95,7 @@ class Assignments extends Component{
             [e.target.name]:e.target.value,
         });
         console.log(this.state);
-    };
+    }
 
     onChange = date => {
       console.log(date);
@@ -256,6 +256,7 @@ const styles = {
         flexWrap:'wrap',
         alignItems:'flex-start',
         justifyContent:'flex-start',
+        color:`${Theme.colors.darkBlue}`,
     },
     formStyle: {
         display:'flex',

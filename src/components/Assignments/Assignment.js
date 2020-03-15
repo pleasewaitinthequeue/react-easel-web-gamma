@@ -37,6 +37,7 @@ const styles = {
         display:'flex',
         flexDirection:'column',
         margin:"5px",
+        color:`${Theme.colors.darkBlue}`,
     }
 };
 
