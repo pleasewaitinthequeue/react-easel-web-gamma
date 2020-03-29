@@ -9,6 +9,7 @@ class CourseMain extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user: this.props.user,
             match: this.props.match,
             courseId:null,
             name:null,
@@ -75,7 +76,14 @@ class CourseMain extends Component{
                     <p>{this.state.description}</p>
                 </div>
                 <div>
-                    <Assignments courseId={cId} match={this.state.match} assignments={this.state.assignments}/>
+                    <Assignments
+                      user={this.state.user}
+                      owner={this.state.owner}
+                      managers={this.state.managers}
+                      courseId={cId}
+                      match={this.state.match}
+                      assignments={this.state.assignments}
+                    />
                 </div>
             </div>
         );

@@ -29,6 +29,8 @@ class Assignments extends Component{
             due: '',
             status: '',
             isTemplate: false,
+            owner:this.props.owner,
+            managers:this.props.managers,
         }
     }
 
@@ -100,6 +102,12 @@ class Assignments extends Component{
     onChange = date => {
       console.log(date);
       this.setState({ due: date });
+    }
+
+    editAssignment = (info) => {
+      this.setState({
+
+      });
     }
 
     renderAddAssignment(){
@@ -187,6 +195,7 @@ class Assignments extends Component{
 
         let AssignmentPack = this.state.assignments.map((a) =>
             <Assignment
+                user={this.state.user}
                 assignmentId={a.assignmentId}
                 name={a.name}
                 description={a.description}
@@ -194,6 +203,9 @@ class Assignments extends Component{
                 status={a.status}
                 isTemplate={a.isTemplate}
                 match={this.state.match}
+                owner={this.state.owner}
+                managers={this.state.managers}
+                edit={this.editAssignment.bind(this)}
             />
         );
 
@@ -240,6 +252,7 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
+        color:`${Theme.colors.darkBlue}`,
     },
     addButtonStyleHover:{
         display:'flex',

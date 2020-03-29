@@ -3,6 +3,7 @@ import Course from './Course';
 import fire from '../../data/Fire';
 import { MdAddCircle } from 'react-icons/md';
 import ChipLister from '../common/ChipLister';
+import Theme from '../../data/Theme.json';
 //import data from '../../data/Courses.json';
 
 /*
@@ -108,7 +109,7 @@ class Courses extends Component{
             default:
                 break;
         }
-    };
+    }
 
     addMode = () => {
         this.setState({
@@ -136,7 +137,7 @@ class Courses extends Component{
         }).catch((error)=>{
             console.log(`error:  ${error}`);
         });
-    };
+    }
 
     handleChange = (e) => {
         e.preventDefault();
@@ -144,7 +145,7 @@ class Courses extends Component{
             [e.target.name]:e.target.value,
         });
         console.log(this.state);
-    };
+    }
 
     renderAddButton(){
         return(
@@ -158,6 +159,37 @@ class Courses extends Component{
                 <p>Add Course</p>
             </div>
         );
+    }
+
+    editCourse = (info) => {
+      this.setState({
+        owner: info.owner,
+        name: info.name,
+        school: info.school,
+        title: info.title,
+        description: info.description,
+        students: info.students,
+        managers: info.managers,
+        mode: 'editing',
+      });
+    }
+
+    updateCourse = () => {
+      //e.preventDefault();
+      const { courseId, owner, managers, name, school, title, description, students } = this.state;
+      let courseRef = fire.database().ref(`/courses/${courseId}/`);
+      let course = {
+          owner:owner,
+          name:name,
+          school:school,
+          title:title,
+          description:description,
+          managers:managers,
+          students:students,
+      };
+      courseRef.set(course).then(()=>{
+        this.getCourseList();
+      });
     }
 
     render() {
@@ -178,8 +210,17 @@ class Courses extends Component{
                 );
             case 'full':
                 let CoursePack = this.state.courses.map((c) =>
-                    <Course courseId={c.courseId} owner={c.owner} managers={c.managers} name={c.name}
-                            school={c.school} title={c.title} description={c.description} students={c.students} user={this.state.user}
+                    <Course
+                      courseId={c.courseId}
+                      owner={c.owner}
+                      managers={c.managers}
+                      name={c.name}
+                      school={c.school}
+                      title={c.title}
+                      description={c.description}
+                      students={c.students}
+                      user={this.state.user}
+                      edit={this.editCourse.bind(this)}
                     />
                 );
                 return (
@@ -190,12 +231,12 @@ class Courses extends Component{
                         {this.renderAddButton()}
                     </div>
                 );
-            case 'adding':
+            case 'adding', 'editing':
                 /* "courseId" "owner" "managers" [] "name" "school" "title" "description" "students": [], */
                 return(
                     <div style={styles.formStyle}>
                         <h1>Add Course</h1>
-                        <form onSubmit={this.createCourse} style={styles.formStyle}>
+                        <form onSubmit={this.state.mode == 'adding' ? this.createCourse : this.editCourse} style={styles.formStyle}>
                             <div style={styles.formSectionStyle}>
                                 <label>
                                     Owner:{'  '}
@@ -299,6 +340,7 @@ const styles = {
         display:'flex',
         flexDirection:'row',
         alignItems:'center',
+        color:`${Theme.colors.darkBlue}`,
         justifyContent:'flex-start',
     },
     addButtonStyleHover:{
@@ -306,8 +348,8 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
-        backgroundColor: "#1c4c79",
-        color:"#ecf4ff",
+        backgroundColor: `${Theme.colors.darkBlue}`,
+        color:`${Theme.colors.whiteBlue}`,
         borderRadius:"2px",
     },
     coursePack:{
