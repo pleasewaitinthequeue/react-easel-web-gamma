@@ -1,0 +1,32 @@
+import React, { useState } from 'react';
+
+function RandomComponent({ colors, defaultBgColor, defaultBdColor }) {
+    const [colorArray, setColorArray] = useState(colors);
+    const [bgColor, setBgColor] = useState(colors[defaultBgColor]);
+    const [bdColor, setBdColor] = useState(colors[defaultBdColor]);
+
+    return (
+        <div style={{
+            backgroundColor: this.state.bgColor, 
+            borderColor: this.state.bdColor }}
+            onClick={() => {
+                if(bgColor + 1 == colors.length){
+                    setBgColor = 0;
+                } else {
+                    setBgColor(bgColor + 1);
+                }
+
+                setBgColor(colors[bgColor]);
+
+                if(bdColor + 1 == colors.length){
+                    setBdColor = 0;
+                } else {
+                    setBdColor(bdColor + 1);
+                }
+                setBdColor(colors[bdColor]);
+            }}
+        >
+
+        </div>
+    )
+}
