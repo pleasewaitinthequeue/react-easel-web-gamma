@@ -91,19 +91,26 @@ class App extends Component{
                             <Route exact path='/SignOut' component={(SignOut)} authenticated={false} user={null}/>
                             {/* Private Route Paths = Requires Authentication */}
                             <PrivateRoute exact path='/Dashboard' component={Dashboard} authenticated={authenticated}
-                                          user={currentUser}/>
+                                          user={currentUser}
+                                          />
                             <PrivateRoute exact path='/Notifications' component={NotificationManager} authenticated={authenticated}
-                                          user={currentUser}/>
+                                          user={currentUser}
+                                          />
                             <PrivateRoute exact path='/Profile' component={Profile} authenticated={authenticated}
-                                          user={currentUser}/>
+                                          user={currentUser}
+                                          />
                             <PrivateRoute path='/Courses/:cId/' component={CourseMain}
-                                          authenticated={authenticated} user={currentUser}/>
+                                          authenticated={authenticated} user={currentUser}
+                                          />
                             <PrivateRoute path='/c/:cId/Assignments/:aId/' component={AssignmentMain}
-                                          authenticated={authenticated} user={currentUser}/>
+                                          authenticated={authenticated} user={currentUser}
+                                          />
                             <PrivateRoute path='/c/:cId/a/:aId/Tasks/:tId/' component={TaskMain}
-                                          authenticated={authenticated} user={currentUser}/>
+                                          authenticated={authenticated} user={currentUser}
+                                          />
                             <PrivateRoute path='/c/:cId/a/:aId/t/:tId/Questions/:qId' component={QuestionMain}
-                                          authenticated={authenticated} user={currentUser}/>
+                                          authenticated={authenticated} user={currentUser}
+                                          />
                         </div>
                         {this.renderTimer()}
                         <Footer />
@@ -122,6 +129,7 @@ const styles = {
         minHeight:'100%',
         position:'relative',
         zIndex:0,
+        color:`${Theme.colors.darkBlue}`,
         backgroundColor:`${Theme.colors.whiteBlue}`,
         margin:0,
     },
@@ -134,6 +142,7 @@ const styles = {
         position:'relative',
         padding:'5px',
         zIndex:'0',
+        color:`${Theme.colors.darkBlue}`,
         backgroundColor:`${Theme.colors.whiteBlue}`,
     },
     appStyle:{

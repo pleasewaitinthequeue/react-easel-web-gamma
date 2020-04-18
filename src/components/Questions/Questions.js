@@ -8,6 +8,8 @@ class Questions extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user:this.props.user,
+            editor:this.props.editor,
             match:this.props.match,
             number: 1,
             name: '',
@@ -234,13 +236,15 @@ class Questions extends Component{
         case 'full':
           let QuestionPack = this.state.questions.map((q)=>
               <Question
-                  questionId={q.questionId}
-                  number={q.number}
-                  name={q.name}
-                  description={q.description}
-                  answerType={q.answerType}
-                  status={q.status}
-                  match={this.state.match}
+                user={this.state.user}
+                editor={this.state.editor}
+                questionId={q.questionId}
+                number={q.number}
+                name={q.name}
+                description={q.description}
+                answerType={q.answerType}
+                status={q.status}
+                match={this.state.match}
               />
           );
           return(

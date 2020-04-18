@@ -29,8 +29,8 @@ class Assignments extends Component{
             due: '',
             status: '',
             isTemplate: false,
-            owner:this.props.owner,
-            managers:this.props.managers,
+            editor:this.props.editor,
+            mode:'loading',
         }
     }
 
@@ -38,14 +38,15 @@ class Assignments extends Component{
         this.setState({
             mode:'adding',
         });
-    };
+    }
 
     componentDidMount = () => {
       this.getAssignmentList();
+      //console.log(this.state);
     }
 
     getAssignmentList(){
-      console.log(this.state);
+      //console.log(this.state);
       let assignmentList = [];
       let assignmentRef = fire.database().ref(`/courses/${this.state.courseId}/assignments/`);
       assignmentRef.once('value', (snapshot) => {
@@ -60,7 +61,8 @@ class Assignments extends Component{
                       description:child.val().description, //"description":  "interviewing an industry professional is an important look into how the carbon fiber weaving operations are run on a day to day basis.",
                       due:child.val().due, //"due": "",
                       status:child.val().status, //"status":  "incomplete",
-                      isTemplate:child.val().isTemplate //"isTemplate": false,
+                      isTemplate:child.val().isTemplate, //"isTemplate": false,
+                      editor:this.state.editor
                   });
               });
 
@@ -83,7 +85,7 @@ class Assignments extends Component{
         status:this.state.status,
         isTemplate:this.state.isTemplate
       };
-      console.log(assignment);
+      //console.log(assignment);
       assignmentRef.push(assignment).then(()=>{
           this.getAssignmentList();
       }).catch((error)=>{
@@ -100,17 +102,23 @@ class Assignments extends Component{
     }
 
     onChange = date => {
-      console.log(date);
+      //console.log(date);
       this.setState({ due: date });
     }
 
     editAssignment = (info) => {
       this.setState({
-
+        name: info.name,
+        description: info.description,
+        due: info.due,
+        status: info.status,
+        isTemplate: info.isTemplate,
+        mode: 'editing',
       });
     }
 
     renderAddAssignment(){
+      //console.log(this.state);
       return (
         <div style={styles.formStyle}>
             <h1>Add Course</h1>
@@ -192,10 +200,11 @@ class Assignments extends Component{
     }
 
     render(){
-
+        console.log(`Assignments:  ${this.state.editor}`);
         let AssignmentPack = this.state.assignments.map((a) =>
             <Assignment
                 user={this.state.user}
+                editor={this.state.editor}
                 assignmentId={a.assignmentId}
                 name={a.name}
                 description={a.description}
@@ -203,11 +212,11 @@ class Assignments extends Component{
                 status={a.status}
                 isTemplate={a.isTemplate}
                 match={this.state.match}
-                owner={this.state.owner}
-                managers={this.state.managers}
                 edit={this.editAssignment.bind(this)}
             />
         );
+
+        //console.log(this.state);
 
         switch(this.state.mode){
           case 'empty':
@@ -232,6 +241,12 @@ class Assignments extends Component{
                   {this.renderAddAssignment()}
                 </div>
               );
+          case 'editing':
+            return  (
+              <div style={styles.coursePack}>
+                {this.renderAddAssignment()}
+              </div>
+            );
           case 'loading':
             return (
                 <div style={styles.coursePack}>
@@ -259,9 +274,10 @@ const styles = {
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'flex-start',
-        backgroundColor: "#1c4c79",
+        backgroundColor: `${Theme.colors.darkBlue}`,
         color:`${Theme.colors.whiteBlue}`,
         borderRadius:"2px",
+        cursor: 'pointer',
     },
     coursePack:{
         display:'flex',

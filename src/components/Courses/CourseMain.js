@@ -9,6 +9,7 @@ class CourseMain extends Component{
     constructor(props){
         super(props);
         this.state = {
+            mode: 'loading',
             user: this.props.user,
             match: this.props.match,
             courseId:null,
@@ -20,6 +21,7 @@ class CourseMain extends Component{
             title:null,
             description:null,
             assignments:[],
+            editor:false,
         }
     }
 
@@ -39,7 +41,7 @@ class CourseMain extends Component{
         }
     */
 
-    componentDidMount(){
+    componentWillMount(){
         this.getCourseInfo();
     }
 
@@ -47,8 +49,6 @@ class CourseMain extends Component{
         const { cId } = this.state.match.params;
         let courseRef = fire.database().ref(`/courses/${cId}/`);
         return courseRef.once('value', (snapshot) => {
-            console.log(`course details: ${snapshot.key} ${snapshot.val()}`);
-
             this.setState({
                 courseId:snapshot.key,
                 name:snapshot.val().name,
@@ -59,40 +59,87 @@ class CourseMain extends Component{
                 title:snapshot.val().title,
                 description:snapshot.val().description,
             });
+        }).then(() => {
+          const {user, owner, managers} = this.state;
+          let editor = this.validateOwnership(user.email, owner, managers);
+          console.log(`${user}, ${owner}, ${managers}, ${editor}`);
+          this.setState({editor:editor, mode:'loaded'});
         });
-    };
+    }
+
+    validateOwnership = (user, owner, managers) => {
+      if(user === owner){
+        return true;
+      } else if (managers.includes(user)){
+        return true;
+      } else {
+        return false;
+      }
+    }
 
     render(){
         const { cId } = this.state.match.params;
-        return(
-            <div>
-                <div style={styles.courseMain}>
-                    <Link replace exact to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
-                    <Link exact replace to={`/Courses/${cId}`}>Course</Link>
+        console.log(`CourseMain:  ${this.state.editor}`);
+        switch(this.state.mode){
+          case 'loading':
+            return(
+                <div style={styles.container}>
+                    <div style={styles.courseMain}>
+                        <Link replace exact to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
+                        <Link replace exact to={`/Courses/${cId}`}>Course</Link>
+                    </div>
+                    <div styles={styles.courseMain}>
+                        <h1>{this.state.name}</h1>
+                        <h3>{this.state.title}</h3>
+                        <p>{this.state.description}</p>
+                    </div>
+                    <div>
+                        <h3>Loading.........</h3>
+                    </div>
                 </div>
-                <div styles={styles.courseMain}>
-                    <h1>{this.state.name}</h1>
-                    <h3>{this.state.title}</h3>
-                    <p>{this.state.description}</p>
+            );
+          case 'loaded':
+            return(
+                <div style={styles.container}>
+                    <div style={styles.courseMain}>
+                        <Link replace exact to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
+                        <Link replace exact to={`/Courses/${cId}`}>Course</Link>
+                    </div>
+                    <div styles={styles.courseMain}>
+                        <h1>{this.state.name}</h1>
+                        <h3>{this.state.title}</h3>
+                        <p>{this.state.description}</p>
+                    </div>
+                    <div>
+                        <Assignments
+                          user={this.state.user}
+                          editor={this.state.editor}
+                          courseId={cId}
+                          match={this.state.match}
+                          assignments={this.state.assignments}
+                        />
+                    </div>
                 </div>
-                <div>
-                    <Assignments
-                      user={this.state.user}
-                      owner={this.state.owner}
-                      managers={this.state.managers}
-                      courseId={cId}
-                      match={this.state.match}
-                      assignments={this.state.assignments}
-                    />
-                </div>
-            </div>
-        );
+            );
+          default:
+            return(
+              <div>
+                Oopsy Tootsy, something went wrong!
+              </div>
+            );
+        }
+
     }
 }
 
 const styles = {
+  container:{
+    color:`${Theme.colors.darkBlue}`,
+    borderRadius:'5px',
+  },
   courseMain:{
     color:`${Theme.colors.darkBlue}`,
+    borderRadius:'5px',
   }
 }
 

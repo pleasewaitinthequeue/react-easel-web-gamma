@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { MdTimer } from 'react-icons/md';
+import Theme from '../../data/Theme.json';
 
 //used this article to help inform the timer design
 //https://codeburst.io/lets-build-a-countdown-timer-with-react-part-1-2e7d5692d914
@@ -15,6 +16,7 @@ class TimerComponent extends Component{
       defaultSeconds: '00',
       secondsRemaining: 0,
       header: 'Set Desired Time',
+      button: false,
     }
   }
 
@@ -162,9 +164,10 @@ const styles = {
     top:"0px",
     height: "100%",
     width: "200px",
-    backgroundColor:"#ecf4ff",
-    border: "1px solid #1c4c79",
-    borderBottom: "5px solid #1c4c79",
+    color:`${Theme.colors.darkBlue}`,
+    backgroundColor:`${Theme.colors.whiteBlue}`,
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    borderBottom: `5px solid ${Theme.colors.darkBlue}`,
   },
   inputStyle: {
     width:"30px",
@@ -185,9 +188,11 @@ const styles = {
     position:"absolute",
     right: "0px",
     top:"0px",
-    backgroundColor:"#ecf4ff",
-    border: "1px solid #1c4c79",
-    borderBottom: "5px solid #1c4c79",
+    color:`${Theme.colors.darkBlue}`,
+    backgroundColor:`${Theme.colors.whiteBlue}`,
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    borderBottom: `5px solid ${Theme.colors.darkBlue}`,
+    cursor:'pointer',
   },
   hideButtonStyle:{
     position:"absolute",
@@ -195,9 +200,9 @@ const styles = {
     bottom:"5px",
     width:"80%",
     height:"25px",
-    border: "1px solid #1c4c79",
-    borderRadius:"2px",
-    boxShadow:"1px 1px #1c4c79",
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    borderRadius:"5px",
+    boxShadow:`1px 1px ${Theme.colors.darkBlue}`,
   },
   hideButtonStyleHover:{
     position:"absolute",
@@ -205,11 +210,12 @@ const styles = {
     bottom:"5px",
     width:"80%",
     height:"25px",
-    border: "1px solid #1c4c79",
+    border: `1px solid ${Theme.colors.darkBlue}`,
     borderRadius:"2px",
-    boxShadow:"1px 1px #1c4c79",
-    backgroundColor:"#1c4c79",
-    color: "#ecf4ff",
+    boxShadow:`1px 1px ${Theme.colors.darkBlue}`,
+    backgroundColor:`${Theme.colors.darkBlue}`,
+    color: `${Theme.colors.whiteBlue}`,
+    cursor:'pointer',
   }
 };
 

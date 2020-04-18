@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Theme from '../../data/Theme.json';
+import { MdModeEdit, MdLaunch } from 'react-icons/md';
 import { withRouter } from 'react-router';
 import { Link } from "react-router-dom";
 
@@ -7,7 +8,9 @@ class Task extends Component{
     constructor(props){
         super(props);
         this.state = {
+            user:this.props.user,
             match:this.props.match,
+            editor:this.props.editor,
             taskId:this.props.taskId,
             name:this.props.name,
             type:this.props.type,
@@ -40,32 +43,113 @@ class Task extends Component{
             "creator":  "jomalair@iu.edu"
         },
  */
+    editIcon = () => {
+     console.log(`Task:  ${this.state.editor}`);
+     if(this.state.editor){
+       return(
+         <div
+           style={this.state.editHover ? styles.iconDivStyleHover : styles.iconDivStyle}
+           onClick={this.editMode}
+           onMouseEnter={() => this.setState({editHover: true})}
+           onMouseLeave={() => this.setState({editHover: false})}
+         >
+           <MdModeEdit
+             style={styles.iconStyle}
+           />
+         </div>
+       );
+     }
+    }
 
     render(){
         return(
-            <div>
-              <Link replace exact to={`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.taskId}/`}>
-                  <div style={styles.cardStyle}>
-                      <p>{this.state.name}</p>
-                      <p>{this.state.type}</p>
-                      <p>{this.state.description}</p>
-                  </div>
+            <div style={styles.cardStyle}>
+              <p>{this.state.name}</p>
+              <p>{this.state.type}</p>
+              <p>{this.state.description}</p>
+              <Link
+                replace
+                exact
+                to={{
+                  pathname:`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.taskId}/`,
+                  state:{
+                    editor:this.state.editor,
+                  }
+                }}
+              >
+              <div
+                style={this.state.launchHover ? styles.launchDivStyleHover : styles.launchDivStyle}
+                onMouseEnter={() => this.setState({launchHover: true})}
+                onMouseLeave={() => this.setState({launchHover: false})}
+              >
+                <MdLaunch style={styles.iconStyle} />
+              </div>
               </Link>
+              {this.editIcon()}
             </div>
         );
     }
 }
 
 const styles = {
-    cardStyle:{
-        display:'flex',
-        flexDirection:'column',
-        height:'150px',
-        width:'300px',
-        padding:'5px',
-        margin:'5px',
-        border:`1px solid ${Theme.colors.darkBlue}`,
-    }
+  cardStyle:{
+    position: 'relative',
+      height:'150px',
+      width:'300px',
+      borderRadius:'5px',
+      border:`1px solid ${Theme.colors.darkBlue}`,
+      boxShadow:`2px 2px ${Theme.colors.darkBlue}`,
+      display:'flex',
+      flexDirection:'column',
+      margin:"5px",
+      padding:'5px',
+      color:`${Theme.colors.darkBlue}`,
+  },
+  iconStyle:{
+    fontSize:'30px',
+  },
+  iconDivStyle:{
+    position:'absolute',
+    backgroundColor: `${Theme.colors.whiteBlue}`,
+    color: `${Theme.colors.darkBlue}`,
+    margin: '5px',
+    borderRadius: '5px',
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    right: '0px',
+    bottom: '0px',
+  },
+  iconDivStyleHover:{
+    position:'absolute',
+    backgroundColor: `${Theme.colors.darkBlue}`,
+    color: `${Theme.colors.whiteBlue}`,
+    margin: '5px',
+    borderRadius: '5px',
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    right: '0px',
+    bottom: '0px',
+    cursor: 'pointer',
+  },
+  launchDivStyle:{
+    position:'absolute',
+    backgroundColor: `${Theme.colors.whiteBlue}`,
+    color: `${Theme.colors.darkBlue}`,
+    margin: '5px',
+    borderRadius: '5px',
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    left: '0px',
+    bottom: '0px',
+  },
+  launchDivStyleHover:{
+    position:'absolute',
+    backgroundColor: `${Theme.colors.darkBlue}`,
+    color: `${Theme.colors.whiteBlue}`,
+    margin: '5px',
+    borderRadius: '5px',
+    border: `1px solid ${Theme.colors.darkBlue}`,
+    left: '0px',
+    bottom: '0px',
+    cursor: 'pointer',
+  },
 };
 
 export default withRouter(Task);

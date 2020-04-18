@@ -12,6 +12,7 @@ class Course extends Component{
             user: this.props.user,
             mode: 'card',
             editHover: false,
+            launchHover: false,
             editCourse: this.props.edit,
             info: {
                 courseId: this.props.courseId,
@@ -47,6 +48,7 @@ class Course extends Component{
     }
 
     validateOwnership = (user, owner, managers) => {
+      console.log(user, owner, managers);
       if(user === owner){
         return true;
       } else if (managers.includes(user)){
@@ -60,7 +62,7 @@ class Course extends Component{
       if(this.validateOwnership(this.state.user.email, this.state.info.owner, this.state.info.managers)){
         return(
           <div
-            style={this.state.hover ? styles.iconDivStyleHover : styles.iconDivStyle}
+            style={this.state.editHover ? styles.iconDivStyleHover : styles.iconDivStyle}
             onClick={this.editMode}
             onMouseEnter={() => this.setState({editHover: true})}
             onMouseLeave={() => this.setState({editHover: false})}
@@ -74,7 +76,6 @@ class Course extends Component{
     }
 
     render(){
-      const { students, managers } = this.state;
       switch(this.state.mode){
         case 'card':
           return(
@@ -84,12 +85,21 @@ class Course extends Component{
                       <h5>{this.state.info.title}</h5>
                       {this.editIcon()}
                       <Link replace exact to={`/Courses/${this.state.info.courseId}`}>
-                        <div style={styles.launchDivStyle}>
+                        <div
+                          style={this.state.launchHover ? styles.launchDivStyleHover : styles.launchDivStyle}
+                          onMouseEnter={() => this.setState({launchHover: true})}
+                          onMouseLeave={() => this.setState({launchHover: false})}
+                        >
                           <MdLaunch style={styles.iconStyle} />
                         </div>
                       </Link>
                   </div>
 
+          );
+        default:
+          return (
+            <div>
+            </div>
           );
       }
     }
@@ -105,12 +115,9 @@ const styles = {
         flexDirection:'column',
         margin:'5px',
         padding:'5px',
-        borderRadius:'2px',
+        borderRadius:'5px',
         boxShadow:`2px 2px ${Theme.colors.darkBlue}`,
         color:`${Theme.colors.darkBlue}`,
-    },
-    iconStyle:{
-      fontSize:'30px',
     },
     iconStyle:{
       fontSize:'30px',
@@ -134,6 +141,7 @@ const styles = {
       border: `1px solid ${Theme.colors.darkBlue}`,
       right: '0px',
       bottom: '0px',
+      cursor: 'pointer',
     },
     launchDivStyle:{
       position:'absolute',
@@ -154,6 +162,7 @@ const styles = {
       border: `1px solid ${Theme.colors.darkBlue}`,
       left: '0px',
       bottom: '0px',
+      cursor: 'pointer',
     },
     formStyle: {
         display:'flex',

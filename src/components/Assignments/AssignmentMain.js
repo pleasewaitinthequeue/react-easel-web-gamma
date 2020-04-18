@@ -10,6 +10,7 @@ class AssignmentMain extends Component{
         this.state = {
             user: this.props.user,
             match:this.props.match,
+            editor:this.props.location.state.editor,
             info: {
               assignmentId: '',
               name: '',
@@ -74,7 +75,7 @@ class AssignmentMain extends Component{
                     <h3>{this.state.info.description}</h3>
                     <h5>{this.state.info.status}</h5>
                     <h5>{this.state.info.due.toString()}</h5>
-                    <Tasks match={this.state.match} user={this.state.user}/>
+                    <Tasks match={this.state.match} user={this.state.user} editor={this.state.editor}/>
                 </div>
             </div>
         );

@@ -274,6 +274,8 @@ class Notifications extends Component{
                 </form>
               </div>
       );
+      default:
+        return (<div></div>);
     }
   }
 

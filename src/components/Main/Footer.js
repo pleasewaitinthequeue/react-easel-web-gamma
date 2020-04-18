@@ -30,6 +30,7 @@ const styles = {
         height:'50px',
         bottom:'0px',
         left:'0px',
+        color:`${Theme.colors.darkBlue}`,
         borderTop:`5px solid ${Theme.colors.darkBlue}`,
         display:'flex',
         alignItems:'flex-start',

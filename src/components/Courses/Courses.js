@@ -231,12 +231,12 @@ class Courses extends Component{
                         {this.renderAddButton()}
                     </div>
                 );
-            case 'adding', 'editing':
+            case 'adding':
                 /* "courseId" "owner" "managers" [] "name" "school" "title" "description" "students": [], */
                 return(
                     <div style={styles.formStyle}>
                         <h1>Add Course</h1>
-                        <form onSubmit={this.state.mode == 'adding' ? this.createCourse : this.editCourse} style={styles.formStyle}>
+                        <form onSubmit={this.state.mode === 'adding' ? this.createCourse : this.editCourse} style={styles.formStyle}>
                             <div style={styles.formSectionStyle}>
                                 <label>
                                     Owner:{'  '}
@@ -329,6 +329,104 @@ class Courses extends Component{
                         </form>
                     </div>
                 );
+            case 'editing':
+            /* "courseId" "owner" "managers" [] "name" "school" "title" "description" "students": [], */
+            return(
+                <div style={styles.formStyle}>
+                    <h1>Add Course</h1>
+                    <form onSubmit={this.state.mode === 'adding' ? this.createCourse : this.editCourse} style={styles.formStyle}>
+                        <div style={styles.formSectionStyle}>
+                            <label>
+                                Owner:{'  '}
+                                <input
+                                    name="owner"
+                                    style={styles.formInputStyle}
+                                    type="text"
+                                    placeholder="user@example.com"
+                                    onInput={this.handleChange}
+                                    value={this.state.owner}
+                                />
+                            </label>
+                            <label>
+                                Course Name (Short):{'  '}
+                                <input
+                                    name="name"
+                                    style={styles.formInputStyle}
+                                    type="text"
+                                    placeholder="LIT 101 00001"
+                                    onInput={this.handleChange}
+                                    value={this.state.name}
+                                />
+                            </label>
+                            <label>
+                                School{'  '}
+                                <input
+                                    name="school"
+                                    style={styles.formInputStyle}
+                                    type="text"
+                                    placeholder="Liberal Arts"
+                                    onInput={this.handleChange}
+                                    value={this.state.school}
+                                />
+                            </label>
+                            <label>
+                                Course Title (Long):{'  '}
+                                <input
+                                    name="title"
+                                    style={styles.formInputStyle}
+                                    type="text"
+                                    placeholder="Introduction to Literature"
+                                    onInput={this.handleChange}
+                                    value={this.state.title}
+                                />
+                            </label>
+                            <label>
+                                Course Description:{'  '}
+                                <input
+                                    name="description"
+                                    style={styles.formInputStyle}
+                                    type="text"
+                                    placeholder="An introduction to literature from 500 CE to Present Day"
+                                    onInput={this.handleChange}
+                                    value={this.state.description}
+                                />
+                            </label>
+                        </div>
+                        <div style={styles.chipSectionStyle}>
+                            <label>
+                                Course Managers({managers == null ? 0 : managers.length}):{'  '}
+                                <div style={styles.chipContainerStyle}>
+                                <ChipLister
+                                    divStyle={styles.chipDivStyle}
+                                    inputStyle={styles.chipInputStyle}
+                                    handleChipListStateChange={this.handleChipListStateChange}
+                                    emails={this.state.managers}
+                                    name="managers"
+                                />
+                                </div>
+                            </label>
+                            <label>
+                                Course Students({students == null ? 0 : students.length}):{'  '}
+                                <div style={styles.chipContainerStyle}>
+                                <ChipLister
+                                    divStyle={styles.chipDivStyle}
+                                    inputStyle={styles.chipInputStyle}
+                                    handleChipListStateChange={this.handleChipListStateChange}
+                                    emails={this.state.students}
+                                    name="students"
+                                />
+                                </div>
+                            </label>
+                            <div>
+                                <input
+                                    style={styles.chipInputStyle}
+                                    type="submit"
+                                />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            );
             default:
                 return null;
         }
@@ -350,7 +448,8 @@ const styles = {
         justifyContent:'flex-start',
         backgroundColor: `${Theme.colors.darkBlue}`,
         color:`${Theme.colors.whiteBlue}`,
-        borderRadius:"2px",
+        borderRadius:"5px",
+        cursor: 'pointer',
     },
     coursePack:{
         display:'flex',

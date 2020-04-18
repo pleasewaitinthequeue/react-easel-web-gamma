@@ -10,6 +10,7 @@ class Tasks extends Component{
         this.state = {
             user: this.props.user,
             creator: this.props.user.email,
+            editor: this.props.editor,
             match: this.props.match,
             tasks: [],
             mode: 'loading',
@@ -64,7 +65,7 @@ class Tasks extends Component{
        creator: this.state.creator,
      };
      console.log(task);
-     taskRef.push(task).then(()=>{
+     taskRef.push(task).then(() => {
          this.getTaskList();
      }).catch((error)=>{
          console.log(`error:  ${error}`);
@@ -242,9 +243,22 @@ class Tasks extends Component{
             );
           case 'full':
             let TaskPack = this.state.tasks.map((t)=>
-                <Task taskId={t.taskId} name={t.name} type={t.type} description={t.description}
-                      dueDateSetBy={t.dueDateSetBy} scheduledEvent={t.scheduledEvent} dueDate={t.dueDate}
-                      creator={t.creator} due={t.due} status={t.status} questions={t.questions} match={this.props.match} />
+                <Task
+                  user={this.state.user}
+                  taskId={t.taskId}
+                  name={t.name}
+                  type={t.type}
+                  description={t.description}
+                  dueDateSetBy={t.dueDateSetBy}
+                  scheduledEvent={t.scheduledEvent}
+                  dueDate={t.dueDate}
+                  creator={t.creator}
+                  due={t.due}
+                  status={t.status}
+                  questions={t.questions}
+                  match={this.state.match}
+                  editor={this.state.editor}
+                />
             );
             return(
                 <div>

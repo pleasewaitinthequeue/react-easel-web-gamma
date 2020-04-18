@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Theme from './../../data/Theme';
-import Map from './../Maps/ReactMapGL';
+//import Map from './../Maps/ReactMapGL';
 import { MdMap, MdAccessAlarm } from 'react-icons/md';
 
 class Notification extends Component{
@@ -37,6 +37,10 @@ class Notification extends Component{
               <MdMap size='2em' />
             </div>
           </div>
+        );
+      default:
+        return(
+          <div></div>
         );
     }
   }
