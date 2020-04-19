@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 //import data from "../../data/Courses";
 import fire from '../../data/Fire';
+import Theme from "../../data/Theme";
 import { MdWarning, MdDone, MdQuestionAnswer } from 'react-icons/md';
 import {Link} from "react-router-dom";
 import AnswerText from './../Answers/AnswerText';
 import AnswerLikert from './../Answers/AnswerLikert';
 import AnswerLink from './../Answers/AnswerLink';
+import AnswerCard from './../Answers/AnswerCard';
 
 class QuestionMain extends Component{
     constructor(props){
         super(props);
         this.state = {
             match:this.props.match,
+            editor:this.props.location.state.editor,
             mode: 'loading',
             number: 1,
             name: '',
@@ -19,6 +22,7 @@ class QuestionMain extends Component{
             answerType: '',
             url: '',
             status: '',
+            answers:[],
         }
     }
 
@@ -139,8 +143,58 @@ class QuestionMain extends Component{
       }
     }
 
+    getAnswerInfo = () => {
+      const { cId, aId, tId, qId } = this.state.match.params;
+      if(this.state.editor){
+        let answerRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/${tId}/questions/${qId}/answers`);
+        let answerList = [];
+        answerRef.once('value',(snapshot) => {
+          snapshot.forEach((child) => {
+              console.log(`task: ${child.val()}`);
+              answerList.push({
+                      answerId:child.key,
+                      answerer:child.val().answerer,
+                      answerType:child.val().answerType,
+                      caption:child.val().caption,
+                      description:child.val().description,
+                      title:child.val().title,
+                      url:child.val().url,
+                  });
+              });
+        }).then(() => {
+          this.setState({
+            answers:answerList,
+          })
+        });
+      }
+    }
+
+    renderAnswers = () => {
+      if(this.state.editor){
+        let AnswerPack = this.state.answers.map((a)=>
+            <AnswerCard
+              match={this.state.match}
+              answerId={a.answerId}
+              answerer={a.answerer}
+              answerType={a.answerType}
+              caption={a.caption}
+              description={a.description}
+              title={a.title}
+              url={a.url}
+            />
+        );
+        return (
+          <div style={styles.answerCardStyle}>
+            <h2>Answers to the Question</h2>
+            {AnswerPack}
+          </div>
+        );
+      }
+    }
+
     componentDidMount(){
       this.getQuestionInfo();
+      this.getAnswerInfo();
     }
 
     render(){
@@ -168,8 +222,24 @@ class QuestionMain extends Component{
                     <div>
                         <Link exact="true" replace to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
                         <Link exact="true" replace to={`/Courses/${cId}`}>Course</Link>{' '}>{' '}
-                        <Link exact="true" replace to={`/c/${cId}/Assignments/${aId}`}>Assignment</Link>{' '}>{' '}
-                        <Link exact="true" replace to={`/c/${cId}/a/${aId}/Tasks/${tId}`}>Task</Link>{' '}>{' '}
+                        <Link
+                          exact="true"
+                          replace
+                          to={{
+                            pathname:`/c/${cId}/Assignments/${aId}`,
+                            state:{
+                              editor:this.state.editor,
+                            }
+                          }}>Assignment</Link>{' '}>{' '}
+                        <Link
+                          exact="true"
+                          replace
+                          to={{
+                            pathname:`/c/${cId}/a/${aId}/Tasks/${tId}`,
+                            state:{
+                              editor:this.state.editor,
+                            }
+                          }}>Task</Link>{' '}>{' '}
                         <Link exact="true" replace to={`/c/${cId}/a/${aId}/t/${tId}/Questions/${qId}`}>Question</Link>
                     </div>
                     <div>
@@ -177,6 +247,7 @@ class QuestionMain extends Component{
                         <h4>{this.state.description}</h4>
                         {this.renderIcon()}
                         {this.renderAnswerIcon()}
+                        {this.renderAnswers()}
                     </div>
                 </div>
             );
@@ -301,6 +372,13 @@ const styles = {
         margin:'5px',
         height:'300px',
     },
+    answerCardStyle:{
+      border:`1px solid ${Theme.colors.darkBlue}`,
+      borderRadius:'5px',
+      color:`${Theme.colors.darkBlue}`,
+      margin:'5px',
+      padding:'5px',
+    }
 }
 
 export default QuestionMain;

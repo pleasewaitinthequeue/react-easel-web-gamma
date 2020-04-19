@@ -68,7 +68,15 @@ class AssignmentMain extends Component{
                 <div>
                     <Link exact replace to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
                     <Link exact replace to={`/Courses/${cId}`}>Course</Link>{' '}>{' '}
-                    <Link exact replace to={`/c/${cId}/Assignments/${aId}`}>Assignment</Link>
+                    <Link
+                      exact
+                      replace
+                      to={{
+                        pathname:`/c/${cId}/Assignments/${aId}`,
+                        state:{
+                          editor:this.state.editor,
+                        }
+                      }}>Assignment</Link>
                 </div>
                 <div>
                     <h1>{this.state.info.name}</h1>

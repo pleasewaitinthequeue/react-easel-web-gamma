@@ -10,13 +10,15 @@ class Question extends Component{
         this.state = {
             user:this.props.user,
             editor:this.props.editor,
-            questionId:this.props.questionId,
-            number:this.props.number,
-            name:this.props.name,
-            description:this.props.description,
-            answerType:this.props.answerType,
-            status:this.props.status,
             match:this.props.match,
+            info:{
+              questionId:this.props.questionId,
+              number:this.props.number,
+              name:this.props.name,
+              description:this.props.description,
+              answerType:this.props.answerType,
+              status:this.props.status,
+            },
         }
     }
 
@@ -31,20 +33,44 @@ class Question extends Component{
     }
     */
 
+    renderEditIcon = () => {
+      if(this.state.editor){
+        return(
+          <div
+            style={this.state.editHover ? styles.iconDivStyleHover : styles.iconDivStyle}
+            onMouseEnter={() => this.setState({editHover: true})}
+            onMouseLeave={() => this.setState({editHover: false})}
+          >
+            <MdModeEdit style={styles.iconStyle}/>
+          </div>
+        );
+      }
+    }
+
     render(){
         const { cId, aId, tId } = this.state.match.params;
         return(
           <div style={styles.questionStyle}>
-              <h3>{this.state.number}{'.'}{'  '}{this.state.name}</h3>
-              <p>{this.state.description} (using {this.state.answerType})</p>
-              <Link replace exact to={`/c/${cId}/a/${aId}/t/${tId}/Questions/${this.state.questionId}`}>
-              <div style={styles.launchDivStyle}>
+              <h3>{this.state.info.number}{'.'}{'  '}{this.state.info.name}</h3>
+              <p>{this.state.info.description} (using {this.state.info.answerType})</p>
+              <Link
+                replace
+                exact
+                to={{
+                  pathname:`/c/${cId}/a/${aId}/t/${tId}/Questions/${this.state.info.questionId}`,
+                  state:{
+                    editor:this.state.editor,
+                  }
+                }}>
+              <div
+                style={this.state.launchHover ? styles.launchDivStyleHover : styles.launchDivStyle}
+                onMouseEnter={() => this.setState({launchHover: true})}
+                onMouseLeave={() => this.setState({launchHover: false})}
+              >
                 <MdLaunch style={styles.iconStyle} />
               </div>
               </Link>
-              <div styles={styles.iconDivStyle}>
-                <MdModeEdit style={styles.iconStyle}/>
-              </div>
+              {this.renderEditIcon()}
           </div>
         );
     }
@@ -100,7 +126,7 @@ const styles = {
     margin: '5px',
     borderRadius: '5px',
     border: `1px solid ${Theme.colors.darkBlue}`,
-    left: '0px',
+    right: '100px',
     bottom: '0px',
     cursor: 'pointer',
   },

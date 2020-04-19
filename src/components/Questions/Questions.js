@@ -36,7 +36,7 @@ class Questions extends Component{
       this.setState({
           mode:'adding',
       });
-  };
+  }
 
   componentDidMount() {
     this.getQuestionList();
@@ -100,7 +100,7 @@ class Questions extends Component{
           [e.target.name]:e.target.value,
       });
       console.log(this.state);
-  };
+  }
 
   renderAddButton(){
       return(
@@ -151,7 +151,7 @@ class Questions extends Component{
   renderAddMode(){
     return(
       <div style={styles.formStyle}>
-         <h1>Add Question</h1>
+         <h1>{() => this.state.mode === 'adding' ? 'Add' : 'Edit'} Question</h1>
          <form onSubmit={this.createQuestion} style={styles.formStyle}>
              <div style={styles.formSectionStyle}>
                  <label>
@@ -221,6 +221,12 @@ class Questions extends Component{
             </div>
           );
         case 'adding':
+          return(
+            <div>
+              {this.renderAddMode()}
+            </div>
+          );
+        case 'editing':
           return(
             <div>
               {this.renderAddMode()}

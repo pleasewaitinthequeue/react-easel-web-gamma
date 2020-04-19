@@ -11,14 +11,17 @@ class Task extends Component{
             user:this.props.user,
             match:this.props.match,
             editor:this.props.editor,
-            taskId:this.props.taskId,
-            name:this.props.name,
-            type:this.props.type,
-            description:this.props.description,
-            dueDateSetBy:this.props.dueDateSetBy,
-            scheduledEvent:this.props.scheduledEvent,
-            due:this.props.due,
-            status:this.props.status,
+            info:{
+              taskId:this.props.taskId,
+              name:this.props.name,
+              type:this.props.type,
+              description:this.props.description,
+              dueDateSetBy:this.props.dueDateSetBy,
+              scheduledEvent:this.props.scheduledEvent,
+              due:this.props.due,
+              status:this.props.status,
+            },
+            editTask:this.props.editTask,
             questions:this.props.questions,
         }
     }
@@ -43,6 +46,10 @@ class Task extends Component{
             "creator":  "jomalair@iu.edu"
         },
  */
+    editMode = () => {
+     this.state.editTask(this.state.info);
+    }
+
     editIcon = () => {
      console.log(`Task:  ${this.state.editor}`);
      if(this.state.editor){
@@ -53,9 +60,7 @@ class Task extends Component{
            onMouseEnter={() => this.setState({editHover: true})}
            onMouseLeave={() => this.setState({editHover: false})}
          >
-           <MdModeEdit
-             style={styles.iconStyle}
-           />
+           <MdModeEdit style={styles.iconStyle} />
          </div>
        );
      }
@@ -64,14 +69,14 @@ class Task extends Component{
     render(){
         return(
             <div style={styles.cardStyle}>
-              <p>{this.state.name}</p>
-              <p>{this.state.type}</p>
-              <p>{this.state.description}</p>
+              <p>{this.state.info.name}</p>
+              <p>{this.state.info.type}</p>
+              <p>{this.state.info.description}</p>
               <Link
                 replace
                 exact
                 to={{
-                  pathname:`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.taskId}/`,
+                  pathname:`/c/${this.state.match.params.cId}/a/${this.state.match.params.aId}/Tasks/${this.state.info.taskId}/`,
                   state:{
                     editor:this.state.editor,
                   }

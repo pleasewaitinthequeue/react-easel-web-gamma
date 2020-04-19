@@ -15,6 +15,7 @@ class TaskMain extends Component{
             courseId: this.props.match.params.cId,
             aId: this.props.match.params.aId,
             tId: this.props.match.params.tId,
+            mode: 'loading',
             name: '',
             description: '',
             due: '',
@@ -51,6 +52,7 @@ class TaskMain extends Component{
      }
      getAssignmentInfo(){
        const { aId, cId, tId } = this.state.match.params;
+       console.log(aId, cId, tId);
        let taskRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/${tId}`);
        return taskRef.once('value', (snapshot) => {
            console.log(`task details: ${snapshot.key} ${snapshot.val()}`);
@@ -64,31 +66,57 @@ class TaskMain extends Component{
              dueDateSetBy: snapshot.val().dueDateSetBy,
              type: snapshot.val().type,
              creator: snapshot.val().creator,
+             mode: 'loaded',
            });
        });
      }
 
     render(){
         const { cId, aId, tId } = this.state.match.params;
-        return(
-            <div>
+
+        switch(this.state.mode){
+          case 'loading':
+            return(<h3>Loading.......</h3>);
+          case 'loaded':
+            return(
                 <div>
-                    <Link exact replace to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
-                    <Link exact replace to={`/Courses/${cId}`}>Course</Link>{' '}>{' '}
-                    <Link exact replace to={`/c/${cId}/Assignments/${aId}`}>Assignment</Link>{' '}>{' '}
-                    <Link exact replace to={`/c/${cId}/a/${aId}/Tasks/${tId}`}>Task</Link>
+                    <div>
+                        <Link exact replace to={`/Dashboard`}>Dashboard</Link>{' '}>{' '}
+                        <Link exact replace to={`/Courses/${cId}`}>Course</Link>{' '}>{' '}
+                        <Link
+                          exact
+                          replace
+                          to={{
+                            pathname: `/c/${cId}/Assignments/${aId}`,
+                            state:{
+                              editor:this.state.editor,
+                            }
+                          }}>Assignment</Link>{' '}>{' '}
+                        <Link
+                          exact
+                          replace
+                          to={{
+                            pathname:`/c/${cId}/a/${aId}/Tasks/${tId}`,
+                            state:{
+                              editor:this.state.editor,
+                            }
+                          }}>Task</Link>
+                    </div>
+                    <div style={styles.cardStyle}>
+                        <h4>Task:  {this.state.name}</h4>
+                        <p>{this.state.description}</p>
+                        <Questions
+                          match={this.state.match}
+                          user={this.state.user}
+                          editor={this.state.editor}
+                        />
+                    </div>
                 </div>
-                <div style={styles.cardStyle}>
-                    <h4>Task:  {this.state.name}</h4>
-                    <p>{this.state.description}</p>
-                    <Questions
-                      match={this.state.match}
-                      user={this.state.user}
-                      editor={this.state.editor}
-                    />
-                </div>
-            </div>
-        );
+            );
+          default:
+            return(<h3>Oops, something went wrong.</h3>);
+        }
+
     }
 }
 

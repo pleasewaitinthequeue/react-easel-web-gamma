@@ -72,6 +72,17 @@ class Tasks extends Component{
      });
    }
 
+   editTask = (info) => {
+     this.setState({
+       name: info.name,
+       type: info.type,
+       description: info.description,
+       dueDateSetBy: info.dueDateSetBy,
+       due: info.due,
+       mode: 'editing',
+     });
+   }
+
    getTaskList = () => {
      const { cId, aId } = this.state.match.params;
      let taskRef = fire.database().ref(`/courses/${cId}/assignments/${aId}/tasks/`);
@@ -133,7 +144,7 @@ class Tasks extends Component{
    renderAddMode(){
      return(
        <div style={styles.formStyle}>
-          <h1>Add Task</h1>
+          <h1>{this.state.mode === 'adding' ? 'Add' : 'Edit'} Task</h1>
           <form onSubmit={this.createTask} style={styles.formStyle}>
               <div style={styles.formSectionStyle}>
                   <label>
@@ -234,6 +245,12 @@ class Tasks extends Component{
                 {this.renderAddMode()}
               </div>
             );
+          case 'editing':
+            return(
+              <div>
+                {this.renderAddMode()}
+              </div>
+            );
           case 'empty':
             return(
               <div>
@@ -258,6 +275,7 @@ class Tasks extends Component{
                   questions={t.questions}
                   match={this.state.match}
                   editor={this.state.editor}
+                  editTask={this.editTask.bind(this)}
                 />
             );
             return(
