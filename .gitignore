@@ -7,6 +7,7 @@
 
 # firebase cache
 .firebase/hosting.*
+.firebase/hosting.*.cache
 
 # dependencies
 /node_modules
