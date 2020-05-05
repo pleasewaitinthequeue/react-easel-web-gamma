@@ -13,6 +13,9 @@
 ## EASEL Description
 Educational Application Supporting Experiential Learning (EASEL) is a web application with a mobile application counter part that allows Instructors to facilitate the experiential learning cycle by providing Just In Time content.  An ongoing project, the aim is to facilitate collection of audio / video as well as geospatial notifications that scaffold these types of activities.
 
+## EASEL Code Layout
+Almost all custom code required for this application is nested beneat the ```/src``` folder.  **Assets** includes any media that must be included with the production build, while **Components** includes components required to render the web application. **Login**, **Router**, and **Signup** contain workflows for authentication and authenticated routing. Data contains the initial test JavaScript Object Notation (JSON) file **Courses.json**, as well as **Theme.json** which contains theme data that is referenced by many components in the application. **Style.css** contains some instructions, though most CSS will be found inside the Components themselves, in a const variable called ```styles```.
+
 ## Setup Procedure (Windows)
 1. Install [NodeJS](https://nodejs.org/en/)
 2. Install [Git CLI](https://git-scm.com/downloads)
